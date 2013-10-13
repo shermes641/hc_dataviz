@@ -1,0 +1,43 @@
+<link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.common.min.css" rel="stylesheet">
+<link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.default.min.css" rel="stylesheet">
+<!-- div class="hero-unit">
+  <h1>Data</h1>
+  <ul>
+      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
+  </ul>
+  <p>installed.</p>
+  <h3>Enjoy coding! - Steve</h3>
+</div-->
+
+<h2>Grid</h2>
+
+<p>This grid is pageable, sortable, groupable and filterable.  Select A row to see the Angular binding.</p>
+
+<div class="demo-section">
+    <div kendo-grid k-data-source="products" k-selectable="'row'" k-pageable="{ 'refresh': true, 'pageSizes': true }" k-columns="[{ 'field': 'ProductName', 'title': 'Name'}, { 'field': 'Supplier.SupplierName', 'title': 'Supplier'},{ 'field': 'Category.CategoryName', 'title': 'Category' }]" k-sortable="true" k-groupable="true" k-filterable="true" k-on-change="rowSelected(kendoEvent)" >
+</div>
+<div>
+    <h3>{{selectedItem.ProductName}} <small>(Product ID: {{selectedItem.ProductID}})</small></h3>
+    <p><strong>Quantity in stock: </strong>{{selectedItem.UnitsInStock}}</p>
+    <p><strong>Price per unit: </strong>{{selectedItem.UnitPrice | currency}}</p>
+    <p><strong>Value of stock: </strong>{{selectedItem.UnitsInStock * selectedItem.UnitPrice | currency}}</p>
+</div>
+</div> <h3>DataViz</h3>
+
+<div class="pure-g demo-section">
+    <div class="pure-u-1-3">
+        <div kendo-chart k-options="column"></div>
+    </div>
+    <div class="pure-u-1-3">
+        <div class="gauge">
+            <div kendo-radial-gauge ng-model="value"></div>
+            <input class="gauge-slider" kendo-slider k-min="0" k-max="100" k-large-step="20" k-tick-placement="'none'" ng-model="value" class="span4 offset1"/>
+        </div>
+    </div>
+    <div class="pure-u-1-3">
+        <div kendo-chart k-options="pie"/>
+    </div>
+</div>
+
+
+
