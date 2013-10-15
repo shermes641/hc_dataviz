@@ -1,5 +1,5 @@
-<link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.common.min.css" rel="stylesheet">
-<link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.default.min.css" rel="stylesheet">
+
+<!-- endbuild -->
 <!-- div class="hero-unit">
   <h1>Data</h1>
   <ul>
@@ -13,11 +13,32 @@
 
 <p>This grid is pageable, sortable, groupable and filterable.  Select A row to see the Angular binding.</p>
 
+<!--
+AhCntr: 4002.2
+BTemp: "17 C"
+HSTemp: "20 C"
+IScale: 800
+Ia: 0
+Ib: 0
+IbC: 0
+KwhCntr: 109
+VScale: 1800
+Va: 0.11
+Vb: 25.08
+alarmsMS: "None"
+chState: "Night"
+faultsMS: "None"
+logDate: "2013-09-14 21:31:00.0"
+queenId: "queen_0003"
+-->
 <div class="demo-section">
-    <div kendo-grid k-data-source="products" k-selectable="'row'" k-pageable="{ 'refresh': true, 'pageSizes': true }" k-columns="[{ 'field': 'ProductName', 'title': 'Name'}, { 'field': 'Supplier.SupplierName', 'title': 'Supplier'},{ 'field': 'Category.CategoryName', 'title': 'Category' }]" k-sortable="true" k-groupable="true" k-filterable="true" k-on-change="rowSelected(kendoEvent)" >
+    <div id="loading"></div>
+    <div id="gen_grid" kendo-grid k-data-source="generation" k-selectable="'row'" k-pageable="{ 'refresh': true, 'pageSizes': [5,10,25,50,100,500] }" k-sortable="true" k-groupable="true" k-filterable="true" k-on-change="rowSelected(kendoEvent)" k-columns="gen_columns"  >
+    <!--div kendo-grid k-data-source="products" k-selectable="'row'" k-pageable="{ 'refresh': true, 'pageSizes': true }" k-columns="[{ 'field': 'ProductName', 'title': 'Name'}, { 'field': 'Supplier.SupplierName', 'title': 'Supplier'},{ 'field': 'Category.CategoryName', 'title': 'Category' }]" k-sortable="true" k-groupable="true" k-filterable="true" k-on-change="rowSelected(kendoEvent)" -->
 </div>
+
 <div>
-    <h3>{{selectedItem.ProductName}} <small>(Product ID: {{selectedItem.ProductID}})</small></h3>
+    <h3>{{selectedItem.logDate}} <small>{{selectedItem.queenId}}</small></h3>
     <p><strong>Quantity in stock: </strong>{{selectedItem.UnitsInStock}}</p>
     <p><strong>Price per unit: </strong>{{selectedItem.UnitPrice | currency}}</p>
     <p><strong>Value of stock: </strong>{{selectedItem.UnitsInStock * selectedItem.UnitPrice | currency}}</p>
