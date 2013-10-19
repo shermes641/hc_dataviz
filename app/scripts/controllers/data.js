@@ -1,170 +1,224 @@
 'use strict';
+/**
+ * @fileOverview Provides interface with HC JSON datasources and data page UI functionality.
+ * @module DataController
+ * @author {@link <a href="mailto:stevehermes@gmail.com">Steve Hermes</a>}
+ * @version 1.0.0
+ */
 
+/**
+ Angular / Kendo-UI functionality
+ @module DataController
+ @main Define data controller and datasources
+ **/
 
-
+/**
+ * Provides interface with HC JSON datasources and data page UI functionality.<br>
+ * @class  DataCtrl
+ */
 angular.module('hcDatavizApp')
-  .controller('DataCtrl', ['$scope',function ($scope) {
+    /**
+     * Provides interface with HC JSON datasources and data page UI functionality.<br>
+     * Reference Angular Controller:   <a href="http://code.angularjs.org/1.0.8/docs/guide/dev_guide.mvc.understanding_controller" target="_blank">( Angular Docs )</a>
+     * @method  controller
+     * @param {String} controller name
+     * @param {Function} anonymous function to setup the controller's scope
+     * @chainable
+     * version 1.0.0
+     * @since 1.0.0
+     */
+    .controller('DataCtrl', ['$scope', function ($scope) {
 
-    $scope.awesomeThings = [
-      'Data 1',
-      'Data 2',
-      'Data 3'
-    ];
-        //https://powerhive.herokuapp.com/generation?queenId=queen_0003&firstDate=2013-9&lastDate=2013-10
-        //
-        //var data = [{"queenId":"queen_0003","logDate":"2013-09-14 21:31:00.0","VScale":1800,"IScale":800,"Vb":25.08,"Ib":0.0,"IbC":-0.0,"Va":0.11,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-14 22:01:02.0","VScale":1800,"IScale":800,"Vb":25.06,"Ib":0.0,"IbC":-0.0,"Va":0.09,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"17 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-14 22:31:03.0","VScale":1800,"IScale":800,"Vb":25.04,"Ib":0.0,"IbC":-0.0,"Va":0.1,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"17 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-14 23:01:08.0","VScale":1800,"IScale":800,"Vb":24.98,"Ib":0.0,"IbC":-0.0,"Va":0.09,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"17 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-14 23:30:00.0","VScale":1800,"IScale":800,"Vb":24.99,"Ib":0.0,"IbC":-0.0,"Va":0.09,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 00:01:05.0","VScale":1800,"IScale":800,"Vb":24.93,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 00:31:05.0","VScale":1800,"IScale":800,"Vb":24.93,"Ib":0.0,"IbC":-0.0,"Va":0.09,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 01:00:03.0","VScale":1800,"IScale":800,"Vb":24.91,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"16 C","HSTemp":"18 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 01:30:25.0","VScale":1800,"IScale":800,"Vb":24.88,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"15 C","HSTemp":"18 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 02:01:02.0","VScale":1800,"IScale":800,"Vb":24.85,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"15 C","HSTemp":"18 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 02:32:09.0","VScale":1800,"IScale":800,"Vb":24.83,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"15 C","HSTemp":"18 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 03:01:04.0","VScale":1800,"IScale":800,"Vb":24.72,"Ib":0.0,"IbC":-0.0,"Va":0.65,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"15 C","HSTemp":"18 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 03:31:02.0","VScale":1800,"IScale":800,"Vb":24.64,"Ib":1.0,"IbC":0.1,"Va":24.79,"Ia":0.0,"AhCntr":4002.2,"KwhCntr":109.0,"BTemp":"15 C","HSTemp":"18 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 04:02:05.0","VScale":1800,"IScale":800,"Vb":24.74,"Ib":33.0,"IbC":1.3,"Va":32.43,"Ia":0.1,"AhCntr":4002.6,"KwhCntr":109.0,"BTemp":"15 C","HSTemp":"18 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 04:31:04.0","VScale":1800,"IScale":800,"Vb":24.94,"Ib":68.0,"IbC":2.7,"Va":62.41,"Ia":0.9,"AhCntr":4003.6,"KwhCntr":109.0,"BTemp":"15 C","HSTemp":"19 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 05:00:08.0","VScale":1800,"IScale":800,"Vb":25.12,"Ib":97.0,"IbC":3.8,"Va":66.18,"Ia":1.4,"AhCntr":4005.1,"KwhCntr":109.0,"BTemp":"16 C","HSTemp":"21 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 05:30:05.0","VScale":1800,"IScale":800,"Vb":26.66,"Ib":435.0,"IbC":16.3,"Va":62.03,"Ia":6.7,"AhCntr":4010.3,"KwhCntr":109.0,"BTemp":"18 C","HSTemp":"25 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 06:01:13.0","VScale":1800,"IScale":800,"Vb":27.67,"Ib":641.0,"IbC":22.9,"Va":62.23,"Ia":10.3,"AhCntr":4020.0,"KwhCntr":110.0,"BTemp":"20 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 06:31:05.0","VScale":1800,"IScale":800,"Vb":28.11,"Ib":781.0,"IbC":27.7,"Va":59.06,"Ia":13.5,"AhCntr":4033.0,"KwhCntr":110.0,"BTemp":"23 C","HSTemp":"38 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 07:01:07.0","VScale":1800,"IScale":800,"Vb":28.0,"Ib":665.0,"IbC":23.8,"Va":65.86,"Ia":10.3,"AhCntr":4046.3,"KwhCntr":110.0,"BTemp":"25 C","HSTemp":"42 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 07:31:07.0","VScale":1800,"IScale":800,"Vb":27.97,"Ib":547.0,"IbC":19.9,"Va":67.26,"Ia":8.3,"AhCntr":4057.7,"KwhCntr":111.0,"BTemp":"26 C","HSTemp":"43 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 08:02:03.0","VScale":1800,"IScale":800,"Vb":28.0,"Ib":467.0,"IbC":16.7,"Va":66.77,"Ia":7.2,"AhCntr":4067.1,"KwhCntr":111.0,"BTemp":"25 C","HSTemp":"42 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 08:30:05.0","VScale":1800,"IScale":800,"Vb":28.0,"Ib":377.0,"IbC":13.4,"Va":66.69,"Ia":5.8,"AhCntr":4074.1,"KwhCntr":111.0,"BTemp":"25 C","HSTemp":"41 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 09:02:07.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":265.0,"IbC":9.5,"Va":69.38,"Ia":3.9,"AhCntr":4080.0,"KwhCntr":111.0,"BTemp":"26 C","HSTemp":"40 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 09:31:09.0","VScale":1800,"IScale":800,"Vb":27.34,"Ib":144.0,"IbC":5.2,"Va":73.57,"Ia":2.0,"AhCntr":4083.8,"KwhCntr":111.0,"BTemp":"26 C","HSTemp":"39 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 10:01:01.0","VScale":1800,"IScale":800,"Vb":27.34,"Ib":144.0,"IbC":5.2,"Va":60.56,"Ia":2.4,"AhCntr":4086.4,"KwhCntr":112.0,"BTemp":"26 C","HSTemp":"39 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 10:30:07.0","VScale":1800,"IScale":800,"Vb":27.34,"Ib":101.0,"IbC":3.7,"Va":78.95,"Ia":1.3,"AhCntr":4088.6,"KwhCntr":112.0,"BTemp":"26 C","HSTemp":"38 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 11:01:05.0","VScale":1800,"IScale":800,"Vb":27.28,"Ib":89.0,"IbC":3.2,"Va":75.04,"Ia":1.2,"AhCntr":4090.2,"KwhCntr":112.0,"BTemp":"27 C","HSTemp":"38 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 11:31:05.0","VScale":1800,"IScale":800,"Vb":27.27,"Ib":80.0,"IbC":2.9,"Va":75.92,"Ia":1.1,"AhCntr":4091.8,"KwhCntr":112.0,"BTemp":"27 C","HSTemp":"38 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 12:00:19.0","VScale":1800,"IScale":800,"Vb":27.28,"Ib":99.0,"IbC":3.6,"Va":75.21,"Ia":1.3,"AhCntr":4093.3,"KwhCntr":112.0,"BTemp":"27 C","HSTemp":"38 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 12:31:04.0","VScale":1800,"IScale":800,"Vb":27.28,"Ib":98.0,"IbC":3.5,"Va":75.2,"Ia":1.3,"AhCntr":4095.3,"KwhCntr":112.0,"BTemp":"27 C","HSTemp":"38 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 13:02:02.0","VScale":1800,"IScale":800,"Vb":27.22,"Ib":108.0,"IbC":3.9,"Va":75.15,"Ia":1.5,"AhCntr":4097.0,"KwhCntr":112.0,"BTemp":"28 C","HSTemp":"38 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 13:31:09.0","VScale":1800,"IScale":800,"Vb":27.22,"Ib":97.0,"IbC":3.5,"Va":75.81,"Ia":1.3,"AhCntr":4098.9,"KwhCntr":112.0,"BTemp":"28 C","HSTemp":"38 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 14:00:01.0","VScale":1800,"IScale":800,"Vb":27.28,"Ib":70.0,"IbC":2.5,"Va":75.35,"Ia":1.0,"AhCntr":4100.3,"KwhCntr":112.0,"BTemp":"27 C","HSTemp":"36 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 14:32:06.0","VScale":1800,"IScale":800,"Vb":27.34,"Ib":70.0,"IbC":2.6,"Va":70.48,"Ia":0.9,"AhCntr":4101.7,"KwhCntr":112.0,"BTemp":"26 C","HSTemp":"34 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 15:01:01.0","VScale":1800,"IScale":800,"Vb":27.34,"Ib":72.0,"IbC":2.6,"Va":64.78,"Ia":1.0,"AhCntr":4102.8,"KwhCntr":112.0,"BTemp":"26 C","HSTemp":"33 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 15:30:05.0","VScale":1800,"IScale":800,"Vb":26.22,"Ib":10.0,"IbC":0.4,"Va":43.72,"Ia":0.1,"AhCntr":4103.4,"KwhCntr":112.0,"BTemp":"24 C","HSTemp":"30 C","chState":"Float","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 16:01:01.0","VScale":1800,"IScale":800,"Vb":25.81,"Ib":0.0,"IbC":-0.1,"Va":6.25,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"23 C","HSTemp":"28 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 16:31:03.0","VScale":1800,"IScale":800,"Vb":25.35,"Ib":0.0,"IbC":-0.1,"Va":0.11,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"22 C","HSTemp":"26 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 17:01:10.0","VScale":1800,"IScale":800,"Vb":25.11,"Ib":0.0,"IbC":-0.1,"Va":0.36,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"22 C","HSTemp":"25 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 17:31:04.0","VScale":1800,"IScale":800,"Vb":24.91,"Ib":0.0,"IbC":-0.1,"Va":0.42,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"22 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 18:00:04.0","VScale":1800,"IScale":800,"Vb":24.69,"Ib":0.0,"IbC":-0.1,"Va":0.44,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"21 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 18:30:09.0","VScale":1800,"IScale":800,"Vb":24.75,"Ib":0.0,"IbC":-0.1,"Va":0.46,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"20 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 19:00:02.0","VScale":1800,"IScale":800,"Vb":24.82,"Ib":0.0,"IbC":-0.1,"Va":0.47,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"19 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 20:00:31.0","VScale":1800,"IScale":800,"Vb":24.97,"Ib":0.0,"IbC":-0.1,"Va":0.4,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"19 C","HSTemp":"22 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 20:31:02.0","VScale":1800,"IScale":800,"Vb":24.94,"Ib":0.0,"IbC":-0.1,"Va":0.34,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 21:01:04.0","VScale":1800,"IScale":800,"Vb":24.93,"Ib":0.0,"IbC":-0.1,"Va":0.27,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 21:30:08.0","VScale":1800,"IScale":800,"Vb":24.9,"Ib":0.0,"IbC":-0.1,"Va":0.24,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 22:01:08.0","VScale":1800,"IScale":800,"Vb":24.87,"Ib":0.0,"IbC":-0.1,"Va":0.08,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 22:31:07.0","VScale":1800,"IScale":800,"Vb":24.81,"Ib":0.0,"IbC":-0.1,"Va":0.08,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"18 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 23:01:07.0","VScale":1800,"IScale":800,"Vb":24.79,"Ib":0.0,"IbC":-0.1,"Va":0.07,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-15 23:30:03.0","VScale":1800,"IScale":800,"Vb":24.75,"Ib":0.0,"IbC":-0.1,"Va":0.06,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 00:00:04.0","VScale":1800,"IScale":800,"Vb":24.72,"Ib":0.0,"IbC":-0.1,"Va":0.05,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 00:30:02.0","VScale":1800,"IScale":800,"Vb":24.72,"Ib":0.0,"IbC":-0.1,"Va":0.05,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 01:01:05.0","VScale":1800,"IScale":800,"Vb":24.69,"Ib":0.0,"IbC":-0.1,"Va":0.05,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 01:31:00.0","VScale":1800,"IScale":800,"Vb":24.67,"Ib":0.0,"IbC":-0.1,"Va":0.04,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 02:01:02.0","VScale":1800,"IScale":800,"Vb":24.64,"Ib":0.0,"IbC":-0.1,"Va":0.04,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 02:31:04.0","VScale":1800,"IScale":800,"Vb":24.56,"Ib":0.0,"IbC":-0.1,"Va":0.04,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"16 C","HSTemp":"18 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 03:01:09.0","VScale":1800,"IScale":800,"Vb":24.49,"Ib":0.0,"IbC":-0.1,"Va":0.74,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"15 C","HSTemp":"18 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 03:31:00.0","VScale":1800,"IScale":800,"Vb":24.43,"Ib":3.0,"IbC":0.1,"Va":24.56,"Ia":0.0,"AhCntr":4103.5,"KwhCntr":112.0,"BTemp":"15 C","HSTemp":"18 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 04:01:00.0","VScale":1800,"IScale":800,"Vb":24.53,"Ib":37.0,"IbC":1.5,"Va":45.47,"Ia":0.0,"AhCntr":4103.7,"KwhCntr":112.0,"BTemp":"15 C","HSTemp":"18 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 04:31:16.0","VScale":1800,"IScale":800,"Vb":24.65,"Ib":63.0,"IbC":2.6,"Va":61.73,"Ia":1.0,"AhCntr":4104.7,"KwhCntr":112.0,"BTemp":"16 C","HSTemp":"20 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 05:00:09.0","VScale":1800,"IScale":800,"Vb":24.79,"Ib":104.0,"IbC":4.1,"Va":64.89,"Ia":1.5,"AhCntr":4106.4,"KwhCntr":112.0,"BTemp":"16 C","HSTemp":"22 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 05:30:01.0","VScale":1800,"IScale":800,"Vb":26.44,"Ib":428.0,"IbC":16.1,"Va":61.14,"Ia":6.7,"AhCntr":4111.3,"KwhCntr":112.0,"BTemp":"18 C","HSTemp":"26 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 06:04:04.0","VScale":1800,"IScale":800,"Vb":27.64,"Ib":657.0,"IbC":23.6,"Va":60.77,"Ia":10.9,"AhCntr":4123.0,"KwhCntr":113.0,"BTemp":"22 C","HSTemp":"35 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 06:30:25.0","VScale":1800,"IScale":800,"Vb":27.91,"Ib":755.0,"IbC":27.0,"Va":58.56,"Ia":13.1,"AhCntr":4133.3,"KwhCntr":113.0,"BTemp":"24 C","HSTemp":"40 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 07:01:02.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":748.0,"IbC":26.7,"Va":63.11,"Ia":12.1,"AhCntr":4147.5,"KwhCntr":113.0,"BTemp":"26 C","HSTemp":"46 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 07:31:06.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":650.0,"IbC":23.3,"Va":65.39,"Ia":10.1,"AhCntr":4160.3,"KwhCntr":114.0,"BTemp":"27 C","HSTemp":"47 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 08:01:05.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":563.0,"IbC":20.2,"Va":66.27,"Ia":8.7,"AhCntr":4171.4,"KwhCntr":114.0,"BTemp":"27 C","HSTemp":"46 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 08:31:10.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":478.0,"IbC":17.2,"Va":67.21,"Ia":7.2,"AhCntr":4181.1,"KwhCntr":114.0,"BTemp":"27 C","HSTemp":"44 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 09:00:35.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":375.0,"IbC":13.5,"Va":67.07,"Ia":5.6,"AhCntr":4188.0,"KwhCntr":114.0,"BTemp":"27 C","HSTemp":"42 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 09:33:08.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":269.0,"IbC":9.6,"Va":68.47,"Ia":4.0,"AhCntr":4194.4,"KwhCntr":115.0,"BTemp":"27 C","HSTemp":"41 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 10:00:00.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":197.0,"IbC":7.1,"Va":72.05,"Ia":2.8,"AhCntr":4198.2,"KwhCntr":115.0,"BTemp":"27 C","HSTemp":"40 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 10:30:02.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":142.0,"IbC":5.1,"Va":73.15,"Ia":2.0,"AhCntr":4201.3,"KwhCntr":115.0,"BTemp":"27 C","HSTemp":"39 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 11:01:09.0","VScale":1800,"IScale":800,"Vb":27.82,"Ib":102.0,"IbC":3.7,"Va":75.9,"Ia":1.4,"AhCntr":4203.5,"KwhCntr":115.0,"BTemp":"28 C","HSTemp":"38 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 11:30:07.0","VScale":1800,"IScale":800,"Vb":27.82,"Ib":89.0,"IbC":3.2,"Va":76.68,"Ia":1.2,"AhCntr":4205.0,"KwhCntr":115.0,"BTemp":"28 C","HSTemp":"38 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 12:01:10.0","VScale":1800,"IScale":800,"Vb":27.82,"Ib":85.0,"IbC":3.0,"Va":68.88,"Ia":1.2,"AhCntr":4206.7,"KwhCntr":115.0,"BTemp":"28 C","HSTemp":"37 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 12:30:06.0","VScale":1800,"IScale":800,"Vb":27.82,"Ib":89.0,"IbC":2.5,"Va":77.47,"Ia":1.0,"AhCntr":4208.0,"KwhCntr":115.0,"BTemp":"28 C","HSTemp":"37 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 13:01:09.0","VScale":1800,"IScale":800,"Vb":27.82,"Ib":71.0,"IbC":2.5,"Va":77.68,"Ia":0.9,"AhCntr":4209.3,"KwhCntr":115.0,"BTemp":"28 C","HSTemp":"36 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 13:31:01.0","VScale":1800,"IScale":800,"Vb":27.82,"Ib":105.0,"IbC":3.7,"Va":70.89,"Ia":1.5,"AhCntr":4211.1,"KwhCntr":115.0,"BTemp":"28 C","HSTemp":"36 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 14:01:07.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":74.0,"IbC":3.0,"Va":74.25,"Ia":1.1,"AhCntr":4212.7,"KwhCntr":115.0,"BTemp":"27 C","HSTemp":"35 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 14:32:06.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":87.0,"IbC":3.1,"Va":68.63,"Ia":1.2,"AhCntr":4214.2,"KwhCntr":115.0,"BTemp":"26 C","HSTemp":"34 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 15:00:03.0","VScale":1800,"IScale":800,"Vb":26.52,"Ib":57.0,"IbC":2.1,"Va":54.9,"Ia":0.7,"AhCntr":4215.6,"KwhCntr":115.0,"BTemp":"26 C","HSTemp":"34 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 15:31:00.0","VScale":1800,"IScale":800,"Vb":26.11,"Ib":9.0,"IbC":0.3,"Va":30.03,"Ia":0.0,"AhCntr":4216.0,"KwhCntr":115.0,"BTemp":"24 C","HSTemp":"30 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 16:01:04.0","VScale":1800,"IScale":800,"Vb":25.81,"Ib":0.0,"IbC":-0.0,"Va":4.02,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"23 C","HSTemp":"27 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 16:30:46.0","VScale":1800,"IScale":800,"Vb":25.45,"Ib":0.0,"IbC":-0.0,"Va":0.3,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"23 C","HSTemp":"26 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 17:01:07.0","VScale":1800,"IScale":800,"Vb":25.2,"Ib":0.0,"IbC":-0.0,"Va":0.1,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"22 C","HSTemp":"25 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 17:32:09.0","VScale":1800,"IScale":800,"Vb":24.98,"Ib":0.0,"IbC":-0.0,"Va":0.58,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"22 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 18:01:02.0","VScale":1800,"IScale":800,"Vb":24.83,"Ib":0.0,"IbC":-0.0,"Va":0.19,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"22 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 18:31:04.0","VScale":1800,"IScale":800,"Vb":24.76,"Ib":0.0,"IbC":-0.1,"Va":0.13,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"22 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 19:01:07.0","VScale":1800,"IScale":800,"Vb":24.81,"Ib":0.0,"IbC":-0.1,"Va":0.1,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"21 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 19:31:10.0","VScale":1800,"IScale":800,"Vb":24.9,"Ib":0.0,"IbC":-0.1,"Va":0.32,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"21 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 20:01:05.0","VScale":1800,"IScale":800,"Vb":24.86,"Ib":0.0,"IbC":-0.0,"Va":0.18,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"20 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 20:30:12.0","VScale":1800,"IScale":800,"Vb":24.94,"Ib":0.0,"IbC":-0.0,"Va":0.12,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"20 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 21:01:05.0","VScale":1800,"IScale":800,"Vb":24.92,"Ib":0.0,"IbC":-0.1,"Va":0.08,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"20 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 21:31:03.0","VScale":1800,"IScale":800,"Vb":24.9,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"20 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 22:01:04.0","VScale":1800,"IScale":800,"Vb":24.91,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"20 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 22:31:08.0","VScale":1800,"IScale":800,"Vb":24.88,"Ib":0.0,"IbC":-0.0,"Va":0.11,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"20 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 23:00:03.0","VScale":1800,"IScale":800,"Vb":24.86,"Ib":0.0,"IbC":-0.0,"Va":0.15,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"19 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 23:30:02.0","VScale":1800,"IScale":800,"Vb":24.83,"Ib":0.0,"IbC":-0.0,"Va":0.09,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"19 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-16 23:35:03.0","VScale":1800,"IScale":800,"Vb":24.82,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"19 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 00:00:06.0","VScale":1800,"IScale":800,"Vb":24.8,"Ib":0.0,"IbC":-0.1,"Va":0.07,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"19 C","HSTemp":"22 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 00:30:01.0","VScale":1800,"IScale":800,"Vb":24.78,"Ib":0.0,"IbC":-0.0,"Va":0.06,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"19 C","HSTemp":"22 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 01:01:06.0","VScale":1800,"IScale":800,"Vb":24.75,"Ib":0.0,"IbC":-0.1,"Va":0.05,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"19 C","HSTemp":"22 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 01:31:07.0","VScale":1800,"IScale":800,"Vb":24.69,"Ib":0.0,"IbC":-0.1,"Va":0.05,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 02:00:08.0","VScale":1800,"IScale":800,"Vb":24.61,"Ib":0.0,"IbC":-0.0,"Va":0.05,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 02:31:03.0","VScale":1800,"IScale":800,"Vb":24.54,"Ib":0.0,"IbC":-0.0,"Va":0.04,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 03:01:00.0","VScale":1800,"IScale":800,"Vb":24.43,"Ib":0.0,"IbC":-0.0,"Va":0.34,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 03:31:03.0","VScale":1800,"IScale":800,"Vb":24.32,"Ib":0.0,"IbC":0.0,"Va":24.43,"Ia":0.0,"AhCntr":4216.1,"KwhCntr":115.0,"BTemp":"18 C","HSTemp":"21 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 04:00:06.0","VScale":1800,"IScale":800,"Vb":24.42,"Ib":28.0,"IbC":0.9,"Va":35.06,"Ia":0.0,"AhCntr":4216.2,"KwhCntr":115.0,"BTemp":"18 C","HSTemp":"21 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 04:30:09.0","VScale":1800,"IScale":800,"Vb":24.82,"Ib":120.0,"IbC":4.9,"Va":62.37,"Ia":1.9,"AhCntr":4217.7,"KwhCntr":115.0,"BTemp":"18 C","HSTemp":"23 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 05:00:21.0","VScale":1800,"IScale":800,"Vb":24.85,"Ib":96.0,"IbC":3.8,"Va":60.41,"Ia":1.5,"AhCntr":4219.8,"KwhCntr":115.0,"BTemp":"18 C","HSTemp":"24 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 05:30:04.0","VScale":1800,"IScale":800,"Vb":26.37,"Ib":389.0,"IbC":12.9,"Va":64.13,"Ia":6.1,"AhCntr":4224.5,"KwhCntr":115.0,"BTemp":"19 C","HSTemp":"27 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 06:01:06.0","VScale":1800,"IScale":800,"Vb":27.14,"Ib":501.0,"IbC":17.2,"Va":60.42,"Ia":8.2,"AhCntr":4232.1,"KwhCntr":116.0,"BTemp":"21 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 06:32:38.0","VScale":1800,"IScale":800,"Vb":27.99,"Ib":747.0,"IbC":29.1,"Va":59.71,"Ia":11.9,"AhCntr":4242.1,"KwhCntr":116.0,"BTemp":"23 C","HSTemp":"38 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 07:01:08.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":825.0,"IbC":29.5,"Va":61.86,"Ia":13.7,"AhCntr":4256.9,"KwhCntr":116.0,"BTemp":"26 C","HSTemp":"43 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 07:31:00.0","VScale":1800,"IScale":800,"Vb":27.15,"Ib":373.0,"IbC":13.7,"Va":56.62,"Ia":6.7,"AhCntr":4268.1,"KwhCntr":117.0,"BTemp":"26 C","HSTemp":"43 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 08:06:05.0","VScale":1800,"IScale":800,"Vb":26.59,"Ib":118.0,"IbC":4.4,"Va":57.51,"Ia":2.0,"AhCntr":4275.3,"KwhCntr":117.0,"BTemp":"25 C","HSTemp":"38 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 08:35:03.0","VScale":1800,"IScale":800,"Vb":27.17,"Ib":382.0,"IbC":13.6,"Va":60.84,"Ia":6.4,"AhCntr":4281.0,"KwhCntr":117.0,"BTemp":"24 C","HSTemp":"36 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 09:07:09.0","VScale":1800,"IScale":800,"Vb":28.0,"Ib":615.0,"IbC":22.0,"Va":68.1,"Ia":9.3,"AhCntr":4290.9,"KwhCntr":117.0,"BTemp":"25 C","HSTemp":"38 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 09:32:07.0","VScale":1800,"IScale":800,"Vb":27.54,"Ib":269.0,"IbC":13.4,"Va":56.83,"Ia":4.7,"AhCntr":4297.7,"KwhCntr":117.0,"BTemp":"25 C","HSTemp":"38 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 10:00:42.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":416.0,"IbC":14.9,"Va":66.81,"Ia":6.4,"AhCntr":4304.7,"KwhCntr":118.0,"BTemp":"26 C","HSTemp":"39 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 10:33:09.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":320.0,"IbC":11.5,"Va":60.3,"Ia":5.4,"AhCntr":4311.9,"KwhCntr":118.0,"BTemp":"27 C","HSTemp":"40 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 11:09:04.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":223.0,"IbC":7.9,"Va":72.09,"Ia":3.1,"AhCntr":4317.3,"KwhCntr":118.0,"BTemp":"26 C","HSTemp":"37 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 11:30:06.0","VScale":1800,"IScale":800,"Vb":27.97,"Ib":182.0,"IbC":6.4,"Va":71.35,"Ia":2.5,"AhCntr":4319.8,"KwhCntr":118.0,"BTemp":"25 C","HSTemp":"34 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 12:02:02.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":109.0,"IbC":3.9,"Va":76.34,"Ia":1.5,"AhCntr":4322.4,"KwhCntr":118.0,"BTemp":"26 C","HSTemp":"34 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 12:34:04.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":91.0,"IbC":3.2,"Va":78.83,"Ia":1.2,"AhCntr":4324.5,"KwhCntr":118.0,"BTemp":"26 C","HSTemp":"33 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 13:03:07.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":83.0,"IbC":3.0,"Va":77.15,"Ia":1.2,"AhCntr":4325.9,"KwhCntr":118.0,"BTemp":"26 C","HSTemp":"33 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 13:31:06.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":108.0,"IbC":3.9,"Va":68.65,"Ia":1.6,"AhCntr":4327.4,"KwhCntr":118.0,"BTemp":"26 C","HSTemp":"33 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 14:02:04.0","VScale":1800,"IScale":800,"Vb":27.75,"Ib":86.0,"IbC":3.1,"Va":59.25,"Ia":1.2,"AhCntr":4329.2,"KwhCntr":118.0,"BTemp":"24 C","HSTemp":"30 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 14:31:06.0","VScale":1800,"IScale":800,"Vb":26.61,"Ib":101.0,"IbC":3.8,"Va":59.95,"Ia":1.6,"AhCntr":4330.6,"KwhCntr":118.0,"BTemp":"23 C","HSTemp":"29 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 15:00:08.0","VScale":1800,"IScale":800,"Vb":26.44,"Ib":56.0,"IbC":2.2,"Va":55.97,"Ia":0.7,"AhCntr":4332.2,"KwhCntr":118.0,"BTemp":"23 C","HSTemp":"28 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 15:31:01.0","VScale":1800,"IScale":800,"Vb":26.17,"Ib":10.0,"IbC":0.3,"Va":39.27,"Ia":0.0,"AhCntr":4332.7,"KwhCntr":118.0,"BTemp":"22 C","HSTemp":"27 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 16:01:05.0","VScale":1800,"IScale":800,"Vb":25.86,"Ib":0.0,"IbC":-0.0,"Va":6.61,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"22 C","HSTemp":"25 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 16:31:09.0","VScale":1800,"IScale":800,"Vb":25.3,"Ib":0.0,"IbC":-0.0,"Va":0.13,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"22 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 17:01:08.0","VScale":1800,"IScale":800,"Vb":24.97,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"22 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 17:31:01.0","VScale":1800,"IScale":800,"Vb":24.72,"Ib":0.0,"IbC":-0.0,"Va":0.65,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"23 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 18:00:08.0","VScale":1800,"IScale":800,"Vb":24.49,"Ib":0.0,"IbC":-0.0,"Va":0.18,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"23 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 18:31:01.0","VScale":1800,"IScale":800,"Vb":24.47,"Ib":0.0,"IbC":-0.0,"Va":0.12,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"22 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 19:01:04.0","VScale":1800,"IScale":800,"Vb":24.65,"Ib":0.0,"IbC":-0.0,"Va":0.09,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"21 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 19:31:18.0","VScale":1800,"IScale":800,"Vb":24.54,"Ib":0.0,"IbC":-0.0,"Va":0.07,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"21 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 19:34:24.0","VScale":1800,"IScale":800,"Vb":24.52,"Ib":0.0,"IbC":-0.0,"Va":0.07,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"21 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 20:00:01.0","VScale":1800,"IScale":800,"Vb":24.71,"Ib":0.0,"IbC":-0.0,"Va":0.07,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"20 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 20:31:03.0","VScale":1800,"IScale":800,"Vb":24.76,"Ib":0.0,"IbC":-0.0,"Va":0.05,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"20 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 21:01:05.0","VScale":1800,"IScale":800,"Vb":24.57,"Ib":0.0,"IbC":-0.0,"Va":0.07,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"19 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 21:31:02.0","VScale":1800,"IScale":800,"Vb":24.68,"Ib":0.0,"IbC":-0.0,"Va":0.07,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 22:01:04.0","VScale":1800,"IScale":800,"Vb":24.64,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"18 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 22:31:06.0","VScale":1800,"IScale":800,"Vb":24.61,"Ib":0.0,"IbC":-0.0,"Va":0.05,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"18 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 23:00:05.0","VScale":1800,"IScale":800,"Vb":24.52,"Ib":0.0,"IbC":-0.0,"Va":0.06,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"18 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-17 23:30:05.0","VScale":1800,"IScale":800,"Vb":24.46,"Ib":0.0,"IbC":-0.0,"Va":0.05,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"18 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 00:01:03.0","VScale":1800,"IScale":800,"Vb":24.47,"Ib":0.0,"IbC":-0.0,"Va":0.06,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 00:31:04.0","VScale":1800,"IScale":800,"Vb":24.41,"Ib":0.0,"IbC":-0.0,"Va":0.05,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 01:01:06.0","VScale":1800,"IScale":800,"Vb":24.36,"Ib":0.0,"IbC":-0.0,"Va":0.04,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 01:31:10.0","VScale":1800,"IScale":800,"Vb":24.37,"Ib":0.0,"IbC":-0.0,"Va":0.05,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 02:01:05.0","VScale":1800,"IScale":800,"Vb":24.32,"Ib":0.0,"IbC":-0.0,"Va":0.04,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 02:30:05.0","VScale":1800,"IScale":800,"Vb":24.32,"Ib":0.0,"IbC":-0.0,"Va":0.04,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"17 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 03:00:08.0","VScale":1800,"IScale":800,"Vb":24.26,"Ib":0.0,"IbC":-0.0,"Va":0.09,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 03:31:02.0","VScale":1800,"IScale":800,"Vb":24.13,"Ib":2.0,"IbC":0.1,"Va":24.25,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"16 C","HSTemp":"19 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 04:01:04.0","VScale":1800,"IScale":800,"Vb":24.05,"Ib":9.0,"IbC":0.4,"Va":27.07,"Ia":0.0,"AhCntr":4332.8,"KwhCntr":118.0,"BTemp":"16 C","HSTemp":"19 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 04:31:09.0","VScale":1800,"IScale":800,"Vb":24.07,"Ib":19.0,"IbC":0.8,"Va":54.01,"Ia":0.4,"AhCntr":4333.1,"KwhCntr":118.0,"BTemp":"16 C","HSTemp":"20 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 05:00:09.0","VScale":1800,"IScale":800,"Vb":24.11,"Ib":36.0,"IbC":1.5,"Va":58.91,"Ia":0.5,"AhCntr":4333.5,"KwhCntr":118.0,"BTemp":"16 C","HSTemp":"20 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 05:31:28.0","VScale":1800,"IScale":800,"Vb":24.35,"Ib":102.0,"IbC":4.1,"Va":62.1,"Ia":1.6,"AhCntr":4334.6,"KwhCntr":118.0,"BTemp":"16 C","HSTemp":"21 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 06:01:04.0","VScale":1800,"IScale":800,"Vb":25.04,"Ib":141.0,"IbC":5.6,"Va":60.87,"Ia":2.2,"AhCntr":4337.2,"KwhCntr":118.0,"BTemp":"16 C","HSTemp":"22 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 06:31:04.0","VScale":1800,"IScale":800,"Vb":26.04,"Ib":276.0,"IbC":10.5,"Va":63.62,"Ia":4.3,"AhCntr":4340.9,"KwhCntr":119.0,"BTemp":"17 C","HSTemp":"23 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 07:01:06.0","VScale":1800,"IScale":800,"Vb":27.61,"Ib":607.0,"IbC":21.6,"Va":63.07,"Ia":9.4,"AhCntr":4348.9,"KwhCntr":119.0,"BTemp":"18 C","HSTemp":"28 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 07:31:03.0","VScale":1800,"IScale":800,"Vb":26.89,"Ib":336.0,"IbC":12.8,"Va":61.57,"Ia":5.4,"AhCntr":4358.8,"KwhCntr":119.0,"BTemp":"19 C","HSTemp":"30 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 08:02:09.0","VScale":1800,"IScale":800,"Vb":26.6,"Ib":232.0,"IbC":8.7,"Va":60.9,"Ia":3.8,"AhCntr":4363.2,"KwhCntr":119.0,"BTemp":"19 C","HSTemp":"29 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 08:35:01.0","VScale":1800,"IScale":800,"Vb":26.99,"Ib":385.0,"IbC":14.1,"Va":61.29,"Ia":6.3,"AhCntr":4369.8,"KwhCntr":119.0,"BTemp":"19 C","HSTemp":"29 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 09:30:44.0","VScale":1800,"IScale":800,"Vb":27.15,"Ib":412.0,"IbC":15.5,"Va":58.79,"Ia":6.9,"AhCntr":4387.3,"KwhCntr":120.0,"BTemp":"21 C","HSTemp":"35 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 10:01:01.0","VScale":1800,"IScale":800,"Vb":26.73,"Ib":208.0,"IbC":7.8,"Va":60.5,"Ia":3.4,"AhCntr":4392.2,"KwhCntr":120.0,"BTemp":"21 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 10:34:05.0","VScale":1800,"IScale":800,"Vb":26.96,"Ib":297.0,"IbC":10.9,"Va":61.48,"Ia":4.8,"AhCntr":4397.6,"KwhCntr":120.0,"BTemp":"20 C","HSTemp":"31 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 11:01:07.0","VScale":1800,"IScale":800,"Vb":26.93,"Ib":246.0,"IbC":9.4,"Va":60.83,"Ia":4.0,"AhCntr":4403.0,"KwhCntr":120.0,"BTemp":"21 C","HSTemp":"31 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 11:33:09.0","VScale":1800,"IScale":800,"Vb":27.02,"Ib":302.0,"IbC":11.1,"Va":61.47,"Ia":4.9,"AhCntr":4407.6,"KwhCntr":120.0,"BTemp":"20 C","HSTemp":"30 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 12:03:14.0","VScale":1800,"IScale":800,"Vb":27.69,"Ib":633.0,"IbC":20.4,"Va":60.93,"Ia":10.4,"AhCntr":4413.9,"KwhCntr":121.0,"BTemp":"21 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 12:34:03.0","VScale":1800,"IScale":800,"Vb":27.22,"Ib":361.0,"IbC":12.7,"Va":60.59,"Ia":6.0,"AhCntr":4421.2,"KwhCntr":121.0,"BTemp":"21 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 13:02:05.0","VScale":1800,"IScale":800,"Vb":27.25,"Ib":315.0,"IbC":11.5,"Va":60.84,"Ia":5.2,"AhCntr":4427.0,"KwhCntr":121.0,"BTemp":"22 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 13:31:09.0","VScale":1800,"IScale":800,"Vb":27.02,"Ib":196.0,"IbC":7.4,"Va":60.3,"Ia":3.2,"AhCntr":4432.4,"KwhCntr":121.0,"BTemp":"22 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 14:03:03.0","VScale":1800,"IScale":800,"Vb":27.42,"Ib":337.0,"IbC":12.2,"Va":61.57,"Ia":5.5,"AhCntr":4437.7,"KwhCntr":121.0,"BTemp":"22 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 14:33:06.0","VScale":1800,"IScale":800,"Vb":27.04,"Ib":167.0,"IbC":6.3,"Va":60.11,"Ia":2.7,"AhCntr":4443.9,"KwhCntr":121.0,"BTemp":"22 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 15:01:17.0","VScale":1800,"IScale":800,"Vb":26.36,"Ib":48.0,"IbC":1.7,"Va":57.53,"Ia":0.6,"AhCntr":4445.4,"KwhCntr":121.0,"BTemp":"21 C","HSTemp":"30 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 15:33:09.0","VScale":1800,"IScale":800,"Vb":26.27,"Ib":11.0,"IbC":0.4,"Va":52.43,"Ia":-0.1,"AhCntr":4445.9,"KwhCntr":121.0,"BTemp":"20 C","HSTemp":"28 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 15:38:09.0","VScale":1800,"IScale":800,"Vb":26.16,"Ib":3.0,"IbC":0.2,"Va":33.17,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"20 C","HSTemp":"28 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 15:41:09.0","VScale":1800,"IScale":800,"Vb":26.13,"Ib":3.0,"IbC":0.1,"Va":27.61,"Ia":-0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"20 C","HSTemp":"27 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 16:01:01.0","VScale":1800,"IScale":800,"Vb":25.75,"Ib":0.0,"IbC":-0.0,"Va":0.99,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"20 C","HSTemp":"26 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 17:00:24.0","VScale":1800,"IScale":800,"Vb":24.91,"Ib":0.0,"IbC":-0.0,"Va":0.07,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"20 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 17:31:05.0","VScale":1800,"IScale":800,"Vb":24.77,"Ib":0.0,"IbC":-0.0,"Va":0.12,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"19 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 18:08:03.0","VScale":1800,"IScale":800,"Vb":24.29,"Ib":0.0,"IbC":-0.0,"Va":0.18,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"19 C","HSTemp":"22 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 18:42:24.0","VScale":1800,"IScale":800,"Vb":24.4,"Ib":0.0,"IbC":-0.0,"Va":0.35,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 19:02:04.0","VScale":1800,"IScale":800,"Vb":24.42,"Ib":0.0,"IbC":-0.0,"Va":0.25,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 19:30:09.0","VScale":1800,"IScale":800,"Vb":24.55,"Ib":0.0,"IbC":-0.0,"Va":0.25,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 20:01:04.0","VScale":1800,"IScale":800,"Vb":24.59,"Ib":0.0,"IbC":-0.0,"Va":0.26,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"17 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 20:30:35.0","VScale":1800,"IScale":800,"Vb":24.57,"Ib":0.0,"IbC":-0.0,"Va":0.24,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 21:01:03.0","VScale":1800,"IScale":800,"Vb":24.58,"Ib":0.0,"IbC":-0.0,"Va":0.39,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 21:30:07.0","VScale":1800,"IScale":800,"Vb":24.55,"Ib":0.0,"IbC":-0.0,"Va":0.35,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 22:01:10.0","VScale":1800,"IScale":800,"Vb":24.53,"Ib":0.0,"IbC":-0.0,"Va":0.2,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 22:31:04.0","VScale":1800,"IScale":800,"Vb":24.45,"Ib":0.0,"IbC":-0.0,"Va":0.41,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 23:00:00.0","VScale":1800,"IScale":800,"Vb":24.45,"Ib":0.0,"IbC":-0.0,"Va":0.54,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-18 23:30:02.0","VScale":1800,"IScale":800,"Vb":24.42,"Ib":0.0,"IbC":-0.0,"Va":0.38,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 00:01:08.0","VScale":1800,"IScale":800,"Vb":24.38,"Ib":0.0,"IbC":-0.0,"Va":0.25,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 00:30:33.0","VScale":1800,"IScale":800,"Vb":24.35,"Ib":0.0,"IbC":-0.0,"Va":0.42,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 01:00:02.0","VScale":1800,"IScale":800,"Vb":24.27,"Ib":0.0,"IbC":-0.0,"Va":0.2,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 01:31:06.0","VScale":1800,"IScale":800,"Vb":24.21,"Ib":0.0,"IbC":-0.0,"Va":0.12,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 02:01:00.0","VScale":1800,"IScale":800,"Vb":24.18,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 02:30:06.0","VScale":1800,"IScale":800,"Vb":24.14,"Ib":0.0,"IbC":-0.0,"Va":0.06,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 03:01:04.0","VScale":1800,"IScale":800,"Vb":24.07,"Ib":0.0,"IbC":-0.0,"Va":0.1,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 03:30:22.0","VScale":1800,"IScale":800,"Vb":23.91,"Ib":0.0,"IbC":0.0,"Va":24.02,"Ia":0.0,"AhCntr":4446.0,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"19 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 04:01:07.0","VScale":1800,"IScale":800,"Vb":24.36,"Ib":81.0,"IbC":3.3,"Va":61.12,"Ia":1.2,"AhCntr":4446.6,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"20 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 04:30:00.0","VScale":1800,"IScale":800,"Vb":24.73,"Ib":91.0,"IbC":3.7,"Va":62.2,"Ia":1.5,"AhCntr":4448.3,"KwhCntr":121.0,"BTemp":"16 C","HSTemp":"21 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 05:01:03.0","VScale":1800,"IScale":800,"Vb":25.86,"Ib":254.0,"IbC":9.7,"Va":63.09,"Ia":3.9,"AhCntr":4451.0,"KwhCntr":122.0,"BTemp":"17 C","HSTemp":"23 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 05:31:06.0","VScale":1800,"IScale":800,"Vb":26.59,"Ib":299.0,"IbC":10.5,"Va":61.29,"Ia":4.9,"AhCntr":4457.4,"KwhCntr":122.0,"BTemp":"18 C","HSTemp":"26 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 06:00:06.0","VScale":1800,"IScale":800,"Vb":27.23,"Ib":523.0,"IbC":17.9,"Va":59.82,"Ia":8.7,"AhCntr":4468.2,"KwhCntr":122.0,"BTemp":"21 C","HSTemp":"33 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 06:30:10.0","VScale":1800,"IScale":800,"Vb":28.04,"Ib":867.0,"IbC":30.9,"Va":59.57,"Ia":14.8,"AhCntr":4481.5,"KwhCntr":122.0,"BTemp":"24 C","HSTemp":"41 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 07:00:40.0","VScale":1800,"IScale":800,"Vb":27.58,"Ib":634.0,"IbC":23.7,"Va":58.08,"Ia":11.1,"AhCntr":4494.9,"KwhCntr":123.0,"BTemp":"25 C","HSTemp":"42 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 07:31:04.0","VScale":1800,"IScale":800,"Vb":28.0,"Ib":707.0,"IbC":25.3,"Va":64.68,"Ia":11.1,"AhCntr":4508.6,"KwhCntr":123.0,"BTemp":"25 C","HSTemp":"44 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 08:01:08.0","VScale":1800,"IScale":800,"Vb":27.48,"Ib":454.0,"IbC":16.8,"Va":55.01,"Ia":8.4,"AhCntr":4520.5,"KwhCntr":123.0,"BTemp":"26 C","HSTemp":"44 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 08:30:49.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":529.0,"IbC":19.0,"Va":64.69,"Ia":8.4,"AhCntr":4529.7,"KwhCntr":124.0,"BTemp":"26 C","HSTemp":"43 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 09:01:06.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":452.0,"IbC":16.2,"Va":67.46,"Ia":6.8,"AhCntr":4538.8,"KwhCntr":124.0,"BTemp":"26 C","HSTemp":"42 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 09:31:08.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":378.0,"IbC":13.5,"Va":71.35,"Ia":5.3,"AhCntr":4546.6,"KwhCntr":124.0,"BTemp":"27 C","HSTemp":"42 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 10:01:01.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":328.0,"IbC":11.8,"Va":66.07,"Ia":5.0,"AhCntr":4553.0,"KwhCntr":124.0,"BTemp":"27 C","HSTemp":"41 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 10:30:05.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":274.0,"IbC":9.9,"Va":68.01,"Ia":4.1,"AhCntr":4558.0,"KwhCntr":124.0,"BTemp":"27 C","HSTemp":"40 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 11:01:09.0","VScale":1800,"IScale":800,"Vb":27.88,"Ib":236.0,"IbC":8.5,"Va":76.41,"Ia":3.2,"AhCntr":4562.8,"KwhCntr":125.0,"BTemp":"27 C","HSTemp":"38 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 11:31:02.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":199.0,"IbC":7.1,"Va":76.56,"Ia":2.6,"AhCntr":4567.0,"KwhCntr":125.0,"BTemp":"26 C","HSTemp":"36 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 12:01:06.0","VScale":1800,"IScale":800,"Vb":28.0,"Ib":164.0,"IbC":5.9,"Va":79.14,"Ia":2.1,"AhCntr":4570.0,"KwhCntr":125.0,"BTemp":"25 C","HSTemp":"34 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 12:30:08.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":139.0,"IbC":4.9,"Va":68.07,"Ia":2.1,"AhCntr":4572.8,"KwhCntr":125.0,"BTemp":"26 C","HSTemp":"34 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 13:00:06.0","VScale":1800,"IScale":800,"Vb":26.83,"Ib":97.0,"IbC":3.6,"Va":57.73,"Ia":1.5,"AhCntr":4575.0,"KwhCntr":125.0,"BTemp":"25 C","HSTemp":"33 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 13:31:08.0","VScale":1800,"IScale":800,"Vb":28.06,"Ib":142.0,"IbC":5.0,"Va":63.46,"Ia":2.2,"AhCntr":4577.6,"KwhCntr":125.0,"BTemp":"24 C","HSTemp":"33 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 14:02:05.0","VScale":1800,"IScale":800,"Vb":26.53,"Ib":60.0,"IbC":2.3,"Va":56.12,"Ia":0.8,"AhCntr":4579.3,"KwhCntr":125.0,"BTemp":"23 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 14:30:08.0","VScale":1800,"IScale":800,"Vb":26.51,"Ib":66.0,"IbC":2.5,"Va":57.85,"Ia":0.9,"AhCntr":4580.6,"KwhCntr":125.0,"BTemp":"22 C","HSTemp":"30 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 15:01:00.0","VScale":1800,"IScale":800,"Vb":26.38,"Ib":65.0,"IbC":2.5,"Va":57.54,"Ia":0.8,"AhCntr":4581.9,"KwhCntr":125.0,"BTemp":"22 C","HSTemp":"29 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 15:31:01.0","VScale":1800,"IScale":800,"Vb":26.13,"Ib":7.0,"IbC":0.3,"Va":45.03,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"22 C","HSTemp":"28 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 16:01:03.0","VScale":1800,"IScale":800,"Vb":25.66,"Ib":0.0,"IbC":-0.0,"Va":3.17,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"21 C","HSTemp":"26 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 16:30:04.0","VScale":1800,"IScale":800,"Vb":25.22,"Ib":0.0,"IbC":-0.0,"Va":0.06,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"22 C","HSTemp":"25 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 17:01:43.0","VScale":1800,"IScale":800,"Vb":24.92,"Ib":0.0,"IbC":-0.0,"Va":0.07,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"22 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 17:30:01.0","VScale":1800,"IScale":800,"Vb":24.71,"Ib":0.0,"IbC":-0.0,"Va":0.08,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"22 C","HSTemp":"24 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 18:00:08.0","VScale":1800,"IScale":800,"Vb":24.64,"Ib":0.0,"IbC":-0.0,"Va":0.09,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"21 C","HSTemp":"23 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 18:30:07.0","VScale":1800,"IScale":800,"Vb":24.64,"Ib":0.0,"IbC":-0.0,"Va":0.74,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"20 C","HSTemp":"22 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 19:01:10.0","VScale":1800,"IScale":800,"Vb":24.66,"Ib":0.0,"IbC":-0.0,"Va":0.46,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"19 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 19:30:20.0","VScale":1800,"IScale":800,"Vb":24.72,"Ib":0.0,"IbC":-0.0,"Va":0.8,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 20:00:38.0","VScale":1800,"IScale":800,"Vb":24.8,"Ib":0.0,"IbC":-0.0,"Va":1.63,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"18 C","HSTemp":"21 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 20:31:06.0","VScale":1800,"IScale":800,"Vb":24.78,"Ib":0.0,"IbC":-0.0,"Va":1.79,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"18 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 21:00:08.0","VScale":1800,"IScale":800,"Vb":24.81,"Ib":0.0,"IbC":-0.0,"Va":1.35,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"18 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 21:31:07.0","VScale":1800,"IScale":800,"Vb":24.79,"Ib":0.0,"IbC":-0.0,"Va":0.97,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"18 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 22:01:10.0","VScale":1800,"IScale":800,"Vb":24.76,"Ib":0.0,"IbC":-0.0,"Va":1.63,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 22:30:02.0","VScale":1800,"IScale":800,"Vb":24.71,"Ib":0.0,"IbC":-0.0,"Va":1.3,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 23:01:16.0","VScale":1800,"IScale":800,"Vb":24.69,"Ib":0.0,"IbC":-0.0,"Va":0.88,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-19 23:30:02.0","VScale":1800,"IScale":800,"Vb":24.69,"Ib":0.0,"IbC":-0.0,"Va":0.96,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 00:00:09.0","VScale":1800,"IScale":800,"Vb":24.64,"Ib":0.0,"IbC":-0.0,"Va":0.86,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"17 C","HSTemp":"20 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 00:31:08.0","VScale":1800,"IScale":800,"Vb":24.6,"Ib":0.0,"IbC":-0.0,"Va":0.47,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"17 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 01:00:09.0","VScale":1800,"IScale":800,"Vb":24.61,"Ib":0.0,"IbC":-0.0,"Va":0.24,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"17 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 01:30:15.0","VScale":1800,"IScale":800,"Vb":24.6,"Ib":0.0,"IbC":-0.0,"Va":0.2,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"17 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 02:00:00.0","VScale":1800,"IScale":800,"Vb":24.56,"Ib":0.0,"IbC":-0.0,"Va":0.16,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"17 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 02:30:03.0","VScale":1800,"IScale":800,"Vb":24.52,"Ib":0.0,"IbC":-0.0,"Va":0.13,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 03:01:08.0","VScale":1800,"IScale":800,"Vb":24.32,"Ib":0.0,"IbC":-0.0,"Va":2.93,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"16 C","HSTemp":"19 C","chState":"Night","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 03:31:06.0","VScale":1800,"IScale":800,"Vb":24.23,"Ib":2.0,"IbC":0.1,"Va":25.26,"Ia":0.0,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"16 C","HSTemp":"20 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 04:01:05.0","VScale":1800,"IScale":800,"Vb":24.35,"Ib":5.0,"IbC":0.2,"Va":40.5,"Ia":0.1,"AhCntr":4582.5,"KwhCntr":125.0,"BTemp":"16 C","HSTemp":"20 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 04:31:09.0","VScale":1800,"IScale":800,"Vb":24.43,"Ib":58.0,"IbC":2.4,"Va":57.83,"Ia":0.8,"AhCntr":4583.1,"KwhCntr":125.0,"BTemp":"16 C","HSTemp":"21 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 05:00:03.0","VScale":1800,"IScale":800,"Vb":24.58,"Ib":91.0,"IbC":3.7,"Va":60.63,"Ia":1.4,"AhCntr":4584.5,"KwhCntr":125.0,"BTemp":"17 C","HSTemp":"22 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 05:31:07.0","VScale":1800,"IScale":800,"Vb":25.87,"Ib":282.0,"IbC":10.7,"Va":62.33,"Ia":4.4,"AhCntr":4587.8,"KwhCntr":125.0,"BTemp":"17 C","HSTemp":"24 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 06:01:06.0","VScale":1800,"IScale":800,"Vb":26.95,"Ib":423.0,"IbC":15.3,"Va":61.45,"Ia":6.7,"AhCntr":4596.9,"KwhCntr":126.0,"BTemp":"19 C","HSTemp":"29 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 06:31:11.0","VScale":1800,"IScale":800,"Vb":27.26,"Ib":511.0,"IbC":19.0,"Va":60.46,"Ia":8.4,"AhCntr":4607.7,"KwhCntr":126.0,"BTemp":"21 C","HSTemp":"33 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 07:01:02.0","VScale":1800,"IScale":800,"Vb":26.8,"Ib":278.0,"IbC":10.5,"Va":60.2,"Ia":4.7,"AhCntr":4615.6,"KwhCntr":126.0,"BTemp":"21 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 07:31:02.0","VScale":1800,"IScale":800,"Vb":27.09,"Ib":406.0,"IbC":15.0,"Va":61.49,"Ia":6.5,"AhCntr":4622.5,"KwhCntr":126.0,"BTemp":"21 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 08:00:09.0","VScale":1800,"IScale":800,"Vb":26.66,"Ib":206.0,"IbC":7.7,"Va":61.07,"Ia":3.3,"AhCntr":4628.3,"KwhCntr":126.0,"BTemp":"20 C","HSTemp":"31 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 08:31:02.0","VScale":1800,"IScale":800,"Vb":27.59,"Ib":571.0,"IbC":21.0,"Va":61.35,"Ia":9.3,"AhCntr":4635.1,"KwhCntr":127.0,"BTemp":"21 C","HSTemp":"32 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 09:00:18.0","VScale":1800,"IScale":800,"Vb":28.13,"Ib":767.0,"IbC":27.3,"Va":60.44,"Ia":12.9,"AhCntr":4647.1,"KwhCntr":127.0,"BTemp":"23 C","HSTemp":"37 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 09:31:09.0","VScale":1800,"IScale":800,"Vb":27.94,"Ib":547.0,"IbC":21.7,"Va":57.66,"Ia":9.6,"AhCntr":4659.1,"KwhCntr":127.0,"BTemp":"23 C","HSTemp":"38 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 10:01:04.0","VScale":1800,"IScale":800,"Vb":27.39,"Ib":338.0,"IbC":12.4,"Va":57.94,"Ia":5.9,"AhCntr":4669.0,"KwhCntr":128.0,"BTemp":"24 C","HSTemp":"38 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 10:30:09.0","VScale":1800,"IScale":800,"Vb":27.93,"Ib":505.0,"IbC":17.5,"Va":63.24,"Ia":8.1,"AhCntr":4676.8,"KwhCntr":128.0,"BTemp":"24 C","HSTemp":"38 C","chState":"Absorption","alarmsMS":"None","faultsMS":"None"},{"queenId":"queen_0003","logDate":"2013-09-20 11:01:10.0","VScale":1800,"IScale":800,"Vb":27.6,"Ib":348.0,"IbC":12.5,"Va":60.93,"Ia":5.7,"AhCntr":4684.9,"KwhCntr":128.0,"BTemp":"23 C","HSTemp":"34 C","chState":"MPPT","alarmsMS":"None","faultsMS":"None"}];
-        //if data was a string
-        //var data = eval(data);
-        /*
-        AhCntr: 4002.2
-        BTemp: "17 C"
-        HSTemp: "20 C"
-        IScale: 800
-        Ia: 0
-        Ib: 0
-        IbC: 0
-        KwhCntr: 109
-        VScale: 1800
-        Va: 0.11
-        Vb: 25.08
-        alarmsMS: "None"
-        chState: "Night"
-        faultsMS: "None"
-        logDate: "2013-09-14 21:31:00.0"
-        queenId: "queen_0003"
-        */
-        $scope.generation = new kendo.data.DataSource({
+
+
+
+        /**
+         * Code specific to the Kendo Chart
+         * Reference: <a href="http://docs.kendoui.com/api/dataviz/chart" target="_blank">( Kendo Docs )</a><br>
+         * @submodule  AggregateChart
+         */
+        /**
+         * Provides interface with HC JSON datasources and data page UI functionality.<br>
+         * @class  AggregateChartClaz
+         */
+
+        /**
+         * Kendo DataSource of aggregate chart.<b>
+         * Reference: <a href="http://docs.kendoui.com/api/framework/datasource" target="_blank">( Kendo Docs )</a><br>
+         * After aggegation, the datasource data array has 1 object for each day of data:
+         *
+             {
+                  IbC: "0.00"
+                  Vb: "25.03"
+                  logDate: "2013-09-14"
+             }
+         *
+         * Note: all elements are turned into strings.
+         * This works around the Kendo Grid filter function not handling other data types<br>
+         *
+         *  and the $scope.aggrGenData object has the following elements:
+         *
+            {
+                ABSORPTION: Array[]
+                DATE: Array[]
+                FLOAT: Array[]
+                MPPT: Array[]
+                NIGHT: Array[]
+                SUM: Array[]
+            }
+         *
+
+         * @attribute $scope.chartData
+         * @type kendo.data.DataSource
+         */
+        $scope.chartData = new kendo.data.DataSource({
             transport: {
                 read: "custom/data/gen.json"
-            },
-                requestStart: function () {
-                kendo.ui.progress($("#loading"), true);
-            },
-            requestEnd: function (data) {
-                if (data.response)
-                for (var i=0; i < data.response.length; i++)
-                    for (var k in data.response[i])
-                    {
-                        if (data.response[i].hasOwnProperty(k))
-                        {
-                            data.response[i][k] = String(data.response[i][k]);
-                        }
-                    }
-                kendo.ui.progress($("#loading"), false);
-            },
-            pageSize: 5
-        });
-
-        $scope.gen_columns =
-            [{ 'field': 'queenId', width: 100, 'title': 'Queen'},
-            {'field':  'logDate', width: 100, 'title': 'Date'},
-            {'field':  'chState', width: 88, 'title': 'State'},
-            {'field':  'Vb', width: 55, 'title': 'Bat Volts'},
-            {'field':  'Va', width: 65, 'title': 'Array Volts'},
-            {'field':  'Ib', width: 65, 'title': 'Bat Amps'},
-            {'field':  'Ia', width: 65, 'title': 'Array Amps'},
-            {'field':  'BTemp', width: 65, 'title': 'Bat Temp'},
-            {'field':  'HSTemp', width: 65, 'title': 'Charg Temp'},
-            {'field':  'alarmsMS', width: 65, 'title': 'Alarms'},
-            {'field': 'faultsMS', width: 65, 'title': 'Faults' }] ;
-
-        $scope.products = new kendo.data.DataSource({
-            transport: {
-                read: "custom/data/products.json"
             },
             requestStart: function () {
                 kendo.ui.progress($("#loading"), true);
             },
-            requestEnd: function () {
+            /**
+             * Aggregates the data source into daily averages and fills $scope.aggrGenData with charger operating state data<br>
+             * There is aggregated data for each day in the dataset.<br>
+             * <b>NOTE:</b> Assumes the data is from a MorningStar charge controller
+             * @method requestEnd
+             * @param {DataSource} data  the raw generation data
+             * @chainable
+             * @version 1.0.0
+             * @since 1.0.0
+             */
+            requestEnd: function (data) {
+                if (data && data.response.length > 3) {
+                    var cnt = 1;
+                    var st = 0;
+                    var vb = data.response[0]['Vb'];
+                    var vi = data.response[0]['IbC'];
+                    var max = [vb, vi];
+
+                    var lastState = data.response[0]['chState'].toUpperCase().trim();
+                    $scope.aggrGenData = {};
+                    $scope.aggrGenData['NIGHT'] = [];
+                    $scope.aggrGenData['ABSORPTION'] = [];
+                    $scope.aggrGenData['FLOAT'] = [];
+                    $scope.aggrGenData['MPPT'] = [];
+                    $scope.aggrGenData['DATE'] = [];
+                    $scope.aggrGenData['SUM'] = [];
+                    $scope.aggrGenData['NIGHT'].push(0);
+                    $scope.aggrGenData['ABSORPTION'].push(0);
+                    $scope.aggrGenData['FLOAT'].push(0);
+                    $scope.aggrGenData['MPPT'].push(0);
+                    $scope.aggrGenData['DATE'].push(data.response[0]['logDate'].split(" ")[0]);
+                    $scope.aggrGenData['SUM'].push(0);
+                    var stateIdx = 0;
+                    var ms =  new Date(data.response[0]['logDate']).getTime();
+                    for (var i = 1; i < data.response.length; i++) {
+                        if (data.response[i - 1]['logDate'].split(" ")[0] == data.response[i]['logDate'].split(" ")[0]) {
+                            var hr =  (new Date(data.response[i]['logDate']).getTime() - ms)/1000/60/60;
+                            $scope.aggrGenData[lastState][stateIdx] += hr;
+                            lastState = data.response[i]['chState'].toUpperCase().trim();
+                            ms =  new Date(data.response[i]['logDate']).getTime();
+
+                            vb += data.response[i]['Vb'];
+                            vi += data.response[i]['IbC'];
+                            cnt++;
+                            //var myDate = new Date(data.response[i]['logDate']);
+                            //console.log((myDate.getMonth() + 1) + "-" + myDate.getDate() + "-" + myDate.getFullYear());
+                        } else {
+                            //give the last minutes of each day to whatever state was current
+                            var hr =  (new Date(data.response[i]['logDate']).getTime() - ms)/1000/60/60;
+                            $scope.aggrGenData[lastState][stateIdx] += hr;
+                            $scope.aggrGenData['SUM'][stateIdx] += $scope.aggrGenData['NIGHT'][stateIdx];
+                            $scope.aggrGenData['SUM'][stateIdx] += $scope.aggrGenData['ABSORPTION'][stateIdx];
+                            $scope.aggrGenData['SUM'][stateIdx] += $scope.aggrGenData['FLOAT'][stateIdx];
+                            $scope.aggrGenData['SUM'][stateIdx] += $scope.aggrGenData['MPPT'][stateIdx];
+                            $scope.aggrGenData['NIGHT'].push(0);
+                            $scope.aggrGenData['ABSORPTION'].push(0);
+                            $scope.aggrGenData['FLOAT'].push(0);
+                            $scope.aggrGenData['MPPT'].push(0);
+                            $scope.aggrGenData['DATE'].push(data.response[i]['logDate'].split(" ")[0]);
+                            $scope.aggrGenData['SUM'].push(0);
+                            stateIdx++;
+                            ms =  new Date(data.response[i]['logDate']).getTime();
+                            lastState = data.response[i]['chState'].toUpperCase().trim();
+                            data.response[st] = {};
+                            data.response[st]['logDate'] = data.response[i - 1]['logDate'].split(" ")[0];
+                            data.response[st]['Vb'] = (vb / cnt).toFixed(2);
+                            data.response[st]['IbC'] = (vi / cnt).toFixed(2);
+                            if (data.response[st]['Vb'] > max[0])
+                                max[0] = data.response[st]['Vb'];
+                            if (data.response[st]['IbC'] > max[1])
+                                max[1] = data.response[st]['IbC'];
+                            cnt = 1;
+                            st++;
+                            vb = data.response[i]['Vb'];
+                            vi = data.response[i]['IbC'];
+                        }
+                    }
+                    data.response.splice(st);
+                    max[0] *= 1.1;
+                    max[1] *= 1.1;
+                    var chart = $("#genChart").data("kendoChart");
+                    if (max[0] > max[1])
+                        chart.options.valueAxis.max = max[0];
+                    else
+                        chart.options.valueAxis.max = max[1];
+                    chart.options.series[0].max = max[0];
+                    chart.options.series[1].max = max[1];
+                    chart.refresh();
+                }
                 kendo.ui.progress($("#loading"), false);
-
-            },
-            pageSize: 5
-        });
-
-        // to demonstrate event hanlding
-        $scope.rowSelected = function(e) {
-            var grid = e.sender;
-            var selectedRows = grid.select();
-            for (var i = 0; i < selectedRows.length; i++) {
-                $scope.selectedItem = grid.dataItem(selectedRows[i]);
-                break;
-            }
-        };
-
-        $scope.things = {
-            data: [{ name: "Thing 1", id: 1 },
-                { name: "Thing 2", id: 2 },
-                { name: "Thing 3", id: 3 }]
-        };
-
-        $scope.thingsOptions = {
-            dataSource: {
-                data: [{ name: "Thing 1", id: 1 },
-                    { name: "Thing 2", id: 2 },
-                    { name: "Thing 3", id: 3 }]
-            },
-            dataTextField: "name",
-            dataValueField: "id",
-            optionLabel: "Select A Thing"
-        };
-
-        $scope.thingsChange = function(e) {
-            console.log(e.sender.text());
-        };
-
-        $scope.window = {
-            open: function() {
-                $scope.modal.center().open();
-            }
-        };
-
-        $scope.files = new kendo.data.DataSource({
-            transport: {
-                read: "app/custom/data/files.json"
             }
         });
 
-        $scope.chartSettings = {
-            type: 'line'
-        };
-
-        $scope.column = {
+        /**
+         * The options for the aggregate chart
+         * @attribute $scope.aggr_chart_columns
+         */
+        $scope.aggr_chart_options = {
+             tooltip: {
+                visible: true,
+                format: "{0}",
+                template: "#= tooltipTemplate(dataItem) #"
+            },
             title: {
-                text: "Site Visitors Stats /thousands/"
+                text: "Daily data"
             },
             legend: {
                 visible: false
             },
             seriesDefaults: {
-                type: "column"
+                type: "line"
             },
-            series: [{
-                name: "Total Visits",
-                data: [56000, 63000, 74000 ]
-            },
+            series: [
                 {
-                    name: "Unique visitors",
-                    data: [52000, 34000, 23000 ]
-                }],
+                    name: "Battery Voltage",
+                    field: "Vb",
+                    color: "#D8D846"
+                },
+                {
+                    name: "Charge Current",
+                    field: "IbC",
+                    color: "#2F752F"
+                }
+            ],
             valueAxis: {
-                max: 100000,
+                max: 50,
                 line: {
-                    visible: false
+                    visible: true
                 },
                 minorGridLines: {
                     visible: true
                 }
             },
             categoryAxis: {
-                categories: ["Jan", "Feb", "Mar" ],
+                field: "logDate",
+                labels: {
+                    rotation: -90
+                },
                 majorGridLines: {
                     visible: false
                 }
-            },
-            tooltip: {
-                visible: true,
-                template: "#= series.name #: #= value #"
             },
             chartArea: {
                 background: ""
@@ -172,140 +226,102 @@ angular.module('hcDatavizApp')
         };
 
 
-        $scope.pie = ({
-            title: {
-                position: "bottom",
-                text: "Share of Internet Population Growth"
-            },
-            legend: {
-                visible: false
-            },
-            chartArea: {
-                background: ""
-            },
-            seriesDefaults: {
-                labels: {
+        $scope.onSeriesHover = function(e) {
+            var sum = $scope.aggrGenData['SUM'];
+            var idx = 0;
+            while (($scope.aggrGenData['DATE'][idx] != e.category) && (idx != ($scope.aggrGenData['DATE'].length-1)))
+                idx++;
+            var xx = e.category+'  '+$scope.aggrGenData['SUM'][idx].toFixed(1) +' hrs ';
+            xx += kendo.format(" Avg {0} : {1} ", e.series.name, e.value);
+            var suffix = 'amps';
+            if (xx.indexOf('Volt') != -1)
+                suffix = 'volts';
+            xx += suffix;
+
+            $("#pie_chart").kendoChart({
+                title: {
+                    position: "bottom",
+                    text: xx
+                },
+                legend: {
+                    visible: false
+                },
+                chartArea: {
+                    background: ""
+                },
+                seriesDefaults: {
+                    labels: {
+                        visible: true,
+                        background: "transparent",
+                        template: "#= category #: #= value#%"
+                    }
+                },
+                series: [{
+                    type: "pie",
+                    startAngle: 0,
+                    data: [{
+                        category: "MPPT",
+                        value: (($scope.aggrGenData['MPPT'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
+                        color: "#C93030"
+                    },{
+                        category: "Absorption",
+                        value: (($scope.aggrGenData['ABSORPTION'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
+                        color: "#FFF620"
+                    },{
+                        category: "Float",
+                        value: (($scope.aggrGenData['FLOAT'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
+                        color: "#068c35"
+                    },{
+                        category: "Night",
+                        value: (($scope.aggrGenData['NIGHT'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
+                        color: "#31440E"
+                    }]
+                }],
+                tooltip: {
                     visible: true,
-                    background: "transparent",
-                    template: "#= category #: #= value#%"
+                    format: "{0}%"
                 }
-            },
-            series: [{
-                type: "pie",
-                startAngle: 150,
-                data: [{
-                    category: "Asia",
-                    value: 53.8,
-                    color: "#9de219"
-                },{
-                    category: "Europe",
-                    value: 16.1,
-                    color: "#90cc38"
-                },{
-                    category: "Latin America",
-                    value: 11.3,
-                    color: "#068c35"
-                },{
-                    category: "Africa",
-                    value: 9.6,
-                    color: "#006634"
-                },{
-                    category: "Middle East",
-                    value: 5.2,
-                    color: "#004d38"
-                },{
-                    category: "North America",
-                    value: 3.6,
-                    color: "#033939"
-                }]
-            }],
-            tooltip: {
-                visible: true,
-                format: "{0}%"
-            }
-        });
+            });
+            $('.k-tooltip').fadeTo(2000,0.7);
+
+            var slider = $("#slider").data("kendoSlider");
+            //slider.options.max = e.value * 1.1;
+            //this works, but does not trigger angular model change
+            //slider.value(20);
+            var gauge = $("#gauge").data("kendoRadialGauge");
+            gauge.options.scale.max = $("#genChart").data("kendoChart").options.valueAxis.max;
 
 
-  }]);
-
-//<![CDATA[
-$(function(){
-// theme chooser drop-down
-    $(".themeChooser").kendoDropDownList({
-        dataSource: [
-            { text: "HoneyComb", value: "hc"},
-            { text: "Black", value: "black" },
-            { text: "Blue Opal", value: "blueopal" },
-            { text: "Default", value: "default" },
-            { text: "Metro", value: "metro" },
-            { text: "Silver", value: "silver" }
-        ],
-        dataTextField: "text",
-        dataValueField: "value",
-        change: function (e) {
-            var theme = (this.value() || "hc").toLowerCase();
-            changeTheme(theme);
+            $('#gaugeLabel').text(e.value+' '+suffix);
+            $scope.sliderVal = e.value;
+            gauge.redraw();
         }
+
+
+
+
+        $scope.chartSettings = {
+            type: 'line'
+        };
+
+
+    }]);
+
+
+var valueAxes = [
+    { name: "Battery Voltage", visible: false,
+        title: { text: "Battery Voltage", visible: false}
+    },
+    { name: "Battery Current",
+        title: { text: "Battery Current" }
+    }
+];
+
+
+function createChart() {
+//<div id="genChart" kendo-chart k-data-source="chartData" k-options="column"></div>
+    $("#genChart").kendoChart({
+        valueAxes: valueAxes
     });
-
-// sample widget on the page
-    $("#tree").kendoTreeView({
-        dataSource: [
-            { text: "foo", expanded: true, items: [
-                { text: "bar", selected: true }
-            ]
-            },
-            { text: "baz" }
-        ]
-    });
-
-// loads new stylesheet
-    function changeTheme(skinName, animate) {
-        var doc = document,
-            kendoLinks = $("link[href*='kendo.']", doc.getElementsByTagName("head")[0]),
-            commonLink = kendoLinks.filter("[href*='kendo.common']"),
-            skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
-            href = location.href,
-            skinRegex = /kendo\.\w+(\.min)?\.css/i,
-            extension = skinLink.attr("rel") === "stylesheet" ? ".css" : ".less",
-            url = commonLink.attr("href").replace(skinRegex, "kendo." + skinName + "$1" + extension);
-
-        function preloadStylesheet(file, callback) {
-            var element = $("<link rel='stylesheet' media='print' href='" + file + "'>").appendTo("head");
-
-            setTimeout(function () {
-                callback();
-                element.remove();
-            }, 100);
-        }
-
-        function replaceTheme() {
-            var oldSkinName = $(doc).data("kendoSkin"),
-                newLink;
-
-            if (kendo.support.browser.msie) {
-                newLink = doc.createStyleSheet(url);
-            } else {
-                newLink = skinLink.eq(0).clone().attr("href", url);
-                newLink.insertBefore(skinLink[0]);
-            }
-
-            skinLink.remove();
-
-            $(doc.documentElement).removeClass("k-" + oldSkinName).addClass("k-" + skinName);
-        }
-
-        if (skinName == 'hc')
-            url = "custom/style/kendo.hc.min.css";
-        if (animate) {
-            preloadStylesheet(url, replaceTheme);
-        } else {
-            replaceTheme();
-        }
-    };
-    changeTheme('hc',true);
-    $('.themeChooser option').eq(0).prop('selected', true);
-    //$('data-role="dropdownlist"').append('<option value="50">50</option>');
-    //$('data-role="dropdownlist"').append('<option value="100">100</option>');
-});//]]>
+};
 

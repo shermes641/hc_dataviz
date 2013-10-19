@@ -13,6 +13,7 @@
 
       <!-- build:css(.tmp) styles/main.css -->
       <link rel="stylesheet" href="styles/bootstrap.css">
+      <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
       <!-- endbuild -->
       <link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.common.min.css" rel="stylesheet">
       <link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.default.min.css" rel="stylesheet">
@@ -25,11 +26,6 @@
               top:0;
               left:0;
           }
-          #gen_grid {
-              left: -200px;
-              width: 1300px;
-          }
-
       </style>
 </head>
   <div id="mask"></div>
@@ -45,14 +41,21 @@
 
     <!-- Has to be on main page -->
     <input class="themeChooser" style="float: right;" value="hc" />
-    <div id="tree"></div>    <!-- p>Note: in order for the whole page to be styled, the &lt;body&gt; element has a <code>k-content</code> class.</p -->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="container" style="width: 95%" ng-view=""></div>
 
     <script src="bower_components/jquery/jquery.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="bower_components/jquery/jquery.corner.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/jquery/jui.js"></script>
 
+    <script>
+        $(function() {
+            $( ".resizable" ).resizable();
+        });
+    </script>
 
     <!-- build:js scripts/plugins.js -->
     <script src="bower_components/bootstrap-sass/js/bootstrap-affix.js"></script>
@@ -83,6 +86,8 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/steve.js"></script>
+    <script src="scripts/controllers/genGrid.js"></script>
+    <script src="scripts/controllers/genPie.js"></script>
     <script src="scripts/controllers/data.js"></script>
     <!-- endbuild -->
 

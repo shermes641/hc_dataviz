@@ -1,0 +1,10 @@
+{
+    "name": "HC Dataviz",
+    "description": "Data visualization for HoneyComb",
+    "version": "1.0.0",
+    "url": "http://powerhive.com/",
+    "options": {
+        "outdir": "yuidoc",
+		"paths": ["app/scripts","app/scripts/controllers"]
+    }
+}

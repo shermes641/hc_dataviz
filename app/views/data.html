@@ -1,17 +1,61 @@
+<!-- custom styles for this page to look right -->
+<style>
+    table {
+        top: 10px;
+        left: -13px;
+        width: 100%;
+    }
+    #tree {
+        position: absolute;
+        left: 60px;
+        top: 325px;
+    }
+    .gen_chart {
+        left: 275px;
+        top: -52px;
+        position: relative;
+        z-index: 10000;
+        width: 755px;
+    }
+    #gauge {
+    }
+    #gauge_slider {
+        position: relative;
+        left: 49px;
+    }
+    #gauge_slider_div {
+        position: relative;
+        top: -454px;
+        width: 274px;
+        height: 400px;
+    }
+    #slider_div {
+        position: relative;
+        left: -50px;
+        top: -65px;
+    }
+    #pie_chart_div {
+        position: relative;
+        top: -856px;
+        left: 1031px;
+        width: 470px;
+        height: 400px;
+    }
+    #pie_chart {
+        //left: -530px;
+    }
+    #sparkDiv {
+        width: 400px;
+        height: 200px;
+        opacity:0.7;
+    }
+    #gen_grid_div {
+        top: -31px;
+        position: relative;
+    }
+</style>
 
-<!-- endbuild -->
-<!-- div class="hero-unit">
-  <h1>Data</h1>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Steve</h3>
-</div-->
 
-<h2>Grid</h2>
-
-<p>This grid is pageable, sortable, groupable and filterable.  Select A row to see the Angular binding.</p>
 
 <!--
 AhCntr: 4002.2
@@ -31,34 +75,92 @@ faultsMS: "None"
 logDate: "2013-09-14 21:31:00.0"
 queenId: "queen_0003"
 -->
-<div class="demo-section">
-    <div id="loading"></div>
-    <div id="gen_grid" kendo-grid k-data-source="generation" k-selectable="'row'" k-pageable="{ 'refresh': true, 'pageSizes': [5,10,25,50,100,500] }" k-sortable="true" k-groupable="true" k-filterable="true" k-on-change="rowSelected(kendoEvent)" k-columns="gen_columns"  >
-    <!--div kendo-grid k-data-source="products" k-selectable="'row'" k-pageable="{ 'refresh': true, 'pageSizes': true }" k-columns="[{ 'field': 'ProductName', 'title': 'Name'}, { 'field': 'Supplier.SupplierName', 'title': 'Supplier'},{ 'field': 'Category.CategoryName', 'title': 'Category' }]" k-sortable="true" k-groupable="true" k-filterable="true" k-on-change="rowSelected(kendoEvent)" -->
-</div>
-
-<div>
-    <h3>{{selectedItem.logDate}} <small>{{selectedItem.queenId}}</small></h3>
-    <p><strong>Quantity in stock: </strong>{{selectedItem.UnitsInStock}}</p>
-    <p><strong>Price per unit: </strong>{{selectedItem.UnitPrice | currency}}</p>
-    <p><strong>Value of stock: </strong>{{selectedItem.UnitsInStock * selectedItem.UnitPrice | currency}}</p>
-</div>
-</div> <h3>DataViz</h3>
-
-<div class="pure-g demo-section">
-    <div class="pure-u-1-3">
-        <div kendo-chart k-options="column"></div>
+<!-- Error: Multiple directives [juiResizable, juiDraggable] asking for isolated scope on: -->
+<div ng-controller="GenGridCtrl" id="gen_grid_div">
+<table class="resizable" draggable ><row><td>
+    <div id="gen_info">
+        <h3>{{selectedItem.queenId}}</h3>
+        <small>{{selectedItem.logDate}} </small>
+        <p><strong>State: </strong>{{selectedItem.chState}}</p>
+        <p><strong>Voltages: Battery </strong>{{selectedItem.Vb}}<strong> Array </strong>{{selectedItem.Va}}</p>
+        <p><strong>Current: Battery </strong>{{selectedItem.IbC}}<strong> Array </strong>{{selectedItem.Ia}}</p>
+        <p><strong>Temp: Battery </strong>{{selectedItem.BTemp}}<strong> Charger </strong>{{selectedItem.HSTemp}}</p>
+        <p><strong>Total KWH to Date: </strong>{{selectedItem.KwhCntr}}</p>
+        <p><strong>Alarms </strong>{{selectedItem.alarmsMS}}<strong> Faults </strong>{{selectedItem.faultsMS}}</p>
     </div>
-    <div class="pure-u-1-3">
-        <div class="gauge">
-            <div kendo-radial-gauge ng-model="value"></div>
-            <input class="gauge-slider" kendo-slider k-min="0" k-max="100" k-large-step="20" k-tick-placement="'none'" ng-model="value" class="span4 offset1"/>
+</td><td>
+    <div class="demo-section resizable">
+        <div id="loading"></div>
+        <div id="gen_grid" kendo-grid k-data-source="generation" k-scrollable="{virtual: true}" k-selectable="'row'" k-pageable="{ 'refresh': true, 'pageSizes': [5,10,25,50,100,500] }" k-sortable="true" k-groupable="true" k-filterable="true" k-on-change="rowSelected(kendoEvent)" k-columns="gen_grid_columns"  >
+    </div>
+</td></row></table>
+</div>
+<br>
+    <div class="gen_chart resizable" draggable>
+        <div id="genChart"kendo-chart k-data-source="chartData" k-options="aggr_chart_options" k-on-series-hover="onSeriesHover(kendoEvent)"></div>
+    </div>
+
+<div draggable ng-controller="GenPieCtrl" id="gauge_slider_div" class="resizable">
+    <div class="gauge">
+        <div id="gauge" kendo-radial-gauge ng-model="sliderVal"></div>
+        <div id="slider_div">
+            <!-- input id="slider" kendo-slider k-min="0" k-max="30" k-large-step="20" k-tick-placement="'none'" ng-model="sliderVal"  class="span4 offset1"/ -->
         </div>
+        <center><p id="gaugeLabel">Click the slider, watch the gauge)</p></center>
     </div>
-    <div class="pure-u-1-3">
-        <div kendo-chart k-options="pie"/>
-    </div>
+    <div id="tree"></div>
+</div>
+
+<div draggable ng-controller="GenPieCtrl" id="pie_chart_div" class="resizable">
+    <div id="pie_chart" kendo-chart k-options="pie"/>
 </div>
 
 
+<script id="sparkTemplate" type="text/x-kendo-template">
+    <div id="sparkDiv" class="resizable" />
+    # setTimeout(function() { createSpark(4); }) #
+</script>
 
+<script>
+    var tooltipTemplate = kendo.template($("#sparkTemplate").html());
+
+    function createSpark(productID) {
+        /*
+         console.log(productID);
+         var childDataSource = new kendo.data.DataSource({
+         type: "odata",
+         transport: {
+         read: {
+         url: "http://demos.kendoui.com/service/Northwind.svc/Order_Details?$filter=ProductID eq " + productID,
+         dataType: "jsonp"
+         }
+         }
+         });
+
+         $("#childChart").kendoChart({
+         dataSource: childDataSource,
+         title: {
+         text: "Orders"
+         },
+         legend: {
+         visible: false
+         },
+         seriesDefaults: {
+         type: "pie",
+         labels: {
+         visible: true,
+         format: "{0}%"
+         }
+         },
+         series: [{
+         field: "Quantity",
+         categoryField: "OrderID",
+         name: "Quantities Ordered",
+         labels: {
+         visible: false
+         }
+         }]
+         });
+         */
+    }
+</script>

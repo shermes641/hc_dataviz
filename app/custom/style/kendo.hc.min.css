@@ -133,7 +133,7 @@ textarea.k-textbox:hover,
 .k-popup,
 .k-content,
 .k-dropdown .k-input {
-    color: #EE9535;
+    color: #F8942C;
 }
 .k-block {
     color: #c4c4c4;
@@ -442,10 +442,10 @@ td.k-state-focused.k-state-selected,
 .k-button:active,
 .k-draghandle.k-state-selected:hover {
     background-image: none;
-    background-image: url(http://cdn.kendostatic.com/2013.2.918/styles/textures/brushed-metal.png), -webkit-linear-gradient(top, #DBA63E 0px, #493F27 100%);
-    background-image: url(http://cdn.kendostatic.com/2013.2.918/styles/textures/brushed-metal.png), -moz-linear-gradient(top, #DBA63E 0px, #493F27 100%);
-    background-image: url(http://cdn.kendostatic.com/2013.2.918/styles/textures/brushed-metal.png), -o-linear-gradient(top, #DBA63E 0px, #493F27 100%);
-    background-image: url(http://cdn.kendostatic.com/2013.2.918/styles/textures/brushed-metal.png), linear-gradient(to bottom, #DBA63E 0px, #493F27 100%);
+    background-image: url(http://cdn.kendostatic.com/2013.2.918/styles/textures/brushed-metal.png), -webkit-linear-gradient(top, #DBA63E 0px, #F7ECD4 100%);
+    background-image: url(http://cdn.kendostatic.com/2013.2.918/styles/textures/brushed-metal.png), -moz-linear-gradient(top, #DBA63E 0px, #F7ECD4 100%);
+    background-image: url(http://cdn.kendostatic.com/2013.2.918/styles/textures/brushed-metal.png), -o-linear-gradient(top, #DBA63E 0px, #F7ECD4 100%);
+    background-image: url(http://cdn.kendostatic.com/2013.2.918/styles/textures/brushed-metal.png), linear-gradient(to bottom, #DBA63E 0px, #F7ECD4 100%);
 }
 .k-button:active,
 .k-draghandle.k-state-selected:hover {

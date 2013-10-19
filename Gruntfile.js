@@ -27,6 +27,14 @@ module.exports = function (grunt) {
   } catch (e) {}
 
   grunt.initConfig({
+	jsdoc : {
+		dist : {
+			src: ['app/scripts/*.js', 'test/*.js'], 
+			options: {
+				destination: 'out'
+			}
+		}
+    },
     yeoman: yeomanConfig,
     watch: {
       coffee: {
@@ -317,6 +325,8 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-jsdoc');
+  
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
