@@ -35,25 +35,16 @@ angular
  * verson 1.0.0
  * @since 1.0.0
  */
-    .config(function ($routeProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl: 'views/main.html',
-                controller: 'MainCtrl'
-            })
-            .when('/steve', {
-                templateUrl: 'views/steve.html',
-                controller: 'SteveCtrl'
-            })
-            .when('/data', {
-                templateUrl: 'views/data.html',
-                controller: 'DataCtrl'
-            })
-            .otherwise({
-                redirectTo: '/'
+        .config(function ($routeProvider) {
+            $routeProvider
+                .when('/', {
+                    templateUrl: 'views/data.html',
+                    controller: 'DataCtrl'
+                })
+                .otherwise({
+                    redirectTo: '/'
             });
     });
-
 angular.module('hcDatavizApp')
 /**
  * Add __draggable__ tag   __directive__ <a href="http://code.angularjs.org/1.0.8/docs/guide/directive" target="_blank">( Angular Docs )</a>
@@ -134,7 +125,6 @@ angular.module('hcDatavizApp')
             }
         }
     })
-
 //<![CDATA[
 $(function () {
     $(".themeChooser")
@@ -212,7 +202,6 @@ $(function () {
             skinRegex = /kendo\.\w+(\.min)?\.css/i,
             extension = skinLink.attr("rel") === "stylesheet" ? ".css" : ".less",
             url = commonLink.attr("href").replace(skinRegex, "kendo." + skinName + "$1" + extension);
-
         function preloadStylesheet(file, callback) {
             var element = $("<link rel='stylesheet' media='print' href='" + file + "'>").appendTo("head");
             setTimeout(function () {
@@ -220,7 +209,6 @@ $(function () {
                 element.remove();
             }, 100);
         }
-
         function replaceTheme() {
             var oldSkinName = $(doc).data("kendoSkin"),newLink;
             if (kendo.support.browser.msie) {
@@ -229,12 +217,9 @@ $(function () {
                 newLink = skinLink.eq(0).clone().attr("href", url);
                 newLink.insertBefore(skinLink[0]);
             }
-
             skinLink.remove();
-
             $(doc.documentElement).removeClass("k-" + oldSkinName).addClass("k-" + skinName);
         }
-
         if (skinName == 'hc')
             url = "custom/style/kendo.hc.min.css";
         if (animate) {
@@ -243,7 +228,6 @@ $(function () {
             replaceTheme();
         }
     };
-
     $("#tree").kendoTreeView({
         checkboxes: {
             checkChildren: true
@@ -269,17 +253,14 @@ $(function () {
             }
         ]
     }).data("kendoTree");
-
     $("#tree").on("change", function (e) {
         var chart = $("#genChart").data("kendoChart");
         var max = -10000000000000.0;
-
         $('#tree input').each(function (index, e) {
             if (index != 0) {
                 //if (valueAxes.name == nodeText.trim()) {
                 //    checkedSeries.push(valueAxes);
                 //    checkedSeries.visible = true;
-
                 chart.options.series[index - 1].visible = (e.checked == true);
                 if (e.checked == true)
                     if (max < chart.options.series[index - 1].max)

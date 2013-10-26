@@ -5,39 +5,149 @@
  * @author {@link <a href="mailto:stevehermes@gmail.com">Steve Hermes</a>}
  * @version 1.0.0
  */
-
 /**
  Angular / Kendo-UI functionality
  @module DataController
  @main Define data controller and datasources
  **/
-
 /**
  * Provides interface with HC JSON datasources and data page UI functionality.<br>
  * @class  DataCtrl
  */
 angular.module('hcDatavizApp')
-    /**
-     * Provides interface with HC JSON datasources and data page UI functionality.<br>
-     * Reference Angular Controller:   <a href="http://code.angularjs.org/1.0.8/docs/guide/dev_guide.mvc.understanding_controller" target="_blank">( Angular Docs )</a>
-     * @method  controller
-     * @param {String} controller name
-     * @param {Function} anonymous function to setup the controller's scope
-     * @chainable
-     * version 1.0.0
-     * @since 1.0.0
-     */
+/**
+ * Provides interface with HC JSON datasources and data page UI functionality.<br>
+ * Reference Angular Controller:   <a href="http://code.angularjs.org/1.0.8/docs/guide/dev_guide.mvc.understanding_controller" target="_blank">( Angular Docs )</a>
+ * @method  controller
+ * @param {String} controller name
+ * @param {Function} anonymous function to setup the controller's scope
+ * @chainable
+ * version 1.0.0
+ * @since 1.0.0
+ */
     .controller('DataCtrl', ['$scope', function ($scope) {
-
-
-
 
         /**
          * Code specific to the Kendo Chart
          * Reference: <a href="http://docs.kendoui.com/api/dataviz/chart" target="_blank">( Kendo Docs )</a><br>
          * @submodule  AggregateChart
          */
-        /**
+        $scope.aggr_chart_options = {
+            tooltip: {
+                visible: true,
+                position: "bottom",
+                format: "{0}",
+                template: "#= tooltipTemplate(dataItem) #"
+            },
+            title: {
+                text: "Daily data"
+            },
+            legend: {
+                visible: false
+            },
+            seriesDefaults: {
+                type: "line"
+            },
+            series: [
+                {
+                    name: "Battery Voltage",
+                    field: "Vb",
+                    color: "#D8D846"
+                },
+                {
+                    name: "Charge Current",
+                    field: "IbC",
+                    color: "#2F752F"
+                }
+            ],
+            valueAxis: {
+                max: 50,
+                line: {
+                    visible: true
+                },
+                minorGridLines: {
+                    visible: true
+                }
+            },
+            categoryAxis: {
+                field: "logDate",
+                labels: {
+                    rotation: -90
+                },
+                majorGridLines: {
+                    visible: false
+                }
+            },
+            chartArea: {
+                background: ""
+            }
+        };
+
+
+        $scope.onSeriesHover = function(e) {
+            //createSparklines(e.dataItem.logDate, $scope.data);
+            rawDt = e.dataItem.logDate;
+	    var sum = $scope.aggrGenData['SUM'];
+            var idx = 0;
+            while (($scope.aggrGenData['DATE'][idx] != e.category) && (idx != ($scope.aggrGenData['DATE'].length-1)))
+                idx++;
+            var xx = e.category+'  '+$scope.aggrGenData['SUM'][idx].toFixed(1) +' hrs ';
+            xx += kendo.format(" Avg {0} : {1} ", e.series.name, e.value);
+            var suffix = 'amps';
+            if (xx.indexOf('Volt') != -1)
+                suffix = 'volts';
+            xx += suffix;
+
+            $("#pie_chart").kendoChart({
+                title: {
+                    position: "bottom",
+                    text: xx
+                },
+                legend: {
+                    visible: false
+                },
+                chartArea: {
+                    background: ""
+                },
+                seriesDefaults: {
+                    labels: {
+                        visible: true,
+                        background: "transparent",
+                        template: "#= category #: #= value#%"
+                    }
+                },
+                series: [{
+                    type: "pie",
+                    startAngle: 0,
+                    data: [{
+                        category: "MPPT",
+                        value: (($scope.aggrGenData['MPPT'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
+                        color: "#C93030"
+                    },{
+                        category: "Absorption",
+                        value: (($scope.aggrGenData['ABSORPTION'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
+                        color: "#FFF620"
+                    },{
+                        category: "Float",
+                        value: (($scope.aggrGenData['FLOAT'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
+                        color: "#068c35"
+                    },{
+                        category: "Night",
+                        value: (($scope.aggrGenData['NIGHT'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
+                        color: "#31440E"
+                    }]
+                }],
+                tooltip: {
+                    visible: true,
+                    format: "{0}%"
+                }
+            });
+            ///////////////$('.k-tooltip').fadeTo(2000,0.7);
+        }
+
+
+        //TODO make aggregates server side
+	        /**
          * Provides interface with HC JSON datasources and data page UI functionality.<br>
          * @class  AggregateChartClaz
          */
@@ -45,27 +155,47 @@ angular.module('hcDatavizApp')
         /**
          * Kendo DataSource of aggregate chart.<b>
          * Reference: <a href="http://docs.kendoui.com/api/framework/datasource" target="_blank">( Kendo Docs )</a><br>
+         * The raw json looks like this:
+         *
+         {
+             AhCntr: 4002.2
+             BTemp: "17 C"
+             HSTemp: "20 C"
+             IScale: 800
+             Ia: 0
+             Ib: 0
+             IbC: 0
+             KwhCntr: 109
+             VScale: 1800
+             Va: 0.11
+             Vb: 25.08
+             alarmsMS: "None"
+             chState: "Night"
+             faultsMS: "None"
+             logDate: "2013-09-14 21:31:00.0"
+             queenId: "queen_0003"
+         }
          * After aggegation, the datasource data array has 1 object for each day of data:
          *
-             {
-                  IbC: "0.00"
-                  Vb: "25.03"
-                  logDate: "2013-09-14"
-             }
+         {
+              IbC: "0.00"
+              Vb: "25.03"
+              logDate: "2013-09-14"
+         }
          *
          * Note: all elements are turned into strings.
          * This works around the Kendo Grid filter function not handling other data types<br>
          *
          *  and the $scope.aggrGenData object has the following elements:
          *
-            {
-                ABSORPTION: Array[]
-                DATE: Array[]
-                FLOAT: Array[]
-                MPPT: Array[]
-                NIGHT: Array[]
-                SUM: Array[]
-            }
+         {
+             ABSORPTION: Array[]
+             DATE: Array[]
+             FLOAT: Array[]
+             MPPT: Array[]
+             NIGHT: Array[]
+             SUM: Array[]
+         }
          *
 
          * @attribute $scope.chartData
@@ -97,6 +227,9 @@ angular.module('hcDatavizApp')
                     var max = [vb, vi];
 
                     var lastState = data.response[0]['chState'].toUpperCase().trim();
+                    rawData = $.map(data.response, function (obj) {
+                                        return $.extend(true, {}, obj);
+                                    });
                     $scope.aggrGenData = {};
                     $scope.aggrGenData['NIGHT'] = [];
                     $scope.aggrGenData['ABSORPTION'] = [];
@@ -170,158 +303,72 @@ angular.module('hcDatavizApp')
                 kendo.ui.progress($("#loading"), false);
             }
         });
-
-        /**
-         * The options for the aggregate chart
-         * @attribute $scope.aggr_chart_columns
-         */
-        $scope.aggr_chart_options = {
-             tooltip: {
-                visible: true,
-                format: "{0}",
-                template: "#= tooltipTemplate(dataItem) #"
-            },
-            title: {
-                text: "Daily data"
-            },
-            legend: {
-                visible: false
-            },
-            seriesDefaults: {
-                type: "line"
-            },
-            series: [
-                {
-                    name: "Battery Voltage",
-                    field: "Vb",
-                    color: "#D8D846"
-                },
-                {
-                    name: "Charge Current",
-                    field: "IbC",
-                    color: "#2F752F"
-                }
-            ],
-            valueAxis: {
-                max: 50,
-                line: {
-                    visible: true
-                },
-                minorGridLines: {
-                    visible: true
-                }
-            },
-            categoryAxis: {
-                field: "logDate",
-                labels: {
-                    rotation: -90
-                },
-                majorGridLines: {
-                    visible: false
-                }
-            },
-            chartArea: {
-                background: ""
-            }
-        };
-
-
-        $scope.onSeriesHover = function(e) {
-            var sum = $scope.aggrGenData['SUM'];
-            var idx = 0;
-            while (($scope.aggrGenData['DATE'][idx] != e.category) && (idx != ($scope.aggrGenData['DATE'].length-1)))
-                idx++;
-            var xx = e.category+'  '+$scope.aggrGenData['SUM'][idx].toFixed(1) +' hrs ';
-            xx += kendo.format(" Avg {0} : {1} ", e.series.name, e.value);
-            var suffix = 'amps';
-            if (xx.indexOf('Volt') != -1)
-                suffix = 'volts';
-            xx += suffix;
-
-            $("#pie_chart").kendoChart({
-                title: {
-                    position: "bottom",
-                    text: xx
-                },
-                legend: {
-                    visible: false
-                },
-                chartArea: {
-                    background: ""
-                },
-                seriesDefaults: {
-                    labels: {
-                        visible: true,
-                        background: "transparent",
-                        template: "#= category #: #= value#%"
-                    }
-                },
-                series: [{
-                    type: "pie",
-                    startAngle: 0,
-                    data: [{
-                        category: "MPPT",
-                        value: (($scope.aggrGenData['MPPT'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
-                        color: "#C93030"
-                    },{
-                        category: "Absorption",
-                        value: (($scope.aggrGenData['ABSORPTION'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
-                        color: "#FFF620"
-                    },{
-                        category: "Float",
-                        value: (($scope.aggrGenData['FLOAT'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
-                        color: "#068c35"
-                    },{
-                        category: "Night",
-                        value: (($scope.aggrGenData['NIGHT'][idx] / $scope.aggrGenData['SUM'][idx])*100).toFixed(1),
-                        color: "#31440E"
-                    }]
-                }],
-                tooltip: {
-                    visible: true,
-                    format: "{0}%"
-                }
-            });
-            $('.k-tooltip').fadeTo(2000,0.7);
-
-            var slider = $("#slider").data("kendoSlider");
-            //slider.options.max = e.value * 1.1;
-            //this works, but does not trigger angular model change
-            //slider.value(20);
-            var gauge = $("#gauge").data("kendoRadialGauge");
-            gauge.options.scale.max = $("#genChart").data("kendoChart").options.valueAxis.max;
-
-
-            $('#gaugeLabel').text(e.value+' '+suffix);
-            $scope.sliderVal = e.value;
-            gauge.redraw();
-        }
-
-
-
-
-        $scope.chartSettings = {
-            type: 'line'
-        };
-
-
     }]);
 
 
-var valueAxes = [
-    { name: "Battery Voltage", visible: false,
-        title: { text: "Battery Voltage", visible: false}
-    },
-    { name: "Battery Current",
-        title: { text: "Battery Current" }
-    }
-];
 
 
-function createChart() {
-//<div id="genChart" kendo-chart k-data-source="chartData" k-options="column"></div>
-    $("#genChart").kendoChart({
-        valueAxes: valueAxes
+
+
+
+var rawData;
+var rawDt;
+var lastDt = ""
+var va = [];
+var vb = [];
+var ci = [];
+var ld = [];
+function createSparklines() {
+    console.log(lastDt == rawDt+"   "+lastDt);
+   // if (lastDt != rawDt) {
+        lastDt = rawDt;
+        va.length = 0;
+        vb.length = 0;
+        ci.length = 0;
+        ld.length = 0;
+        for (var i = 0; i < rawData.length; i++) {
+            if (rawData[i].logDate.indexOf(rawDt) != -1) {
+               va.push(rawData[i].Va);
+               vb.push(rawData[i].Vb);
+               ci.push(rawData[i].IbC);
+               ld.push(rawData[i].logDate);
+            }
+        }
+   // } else {
+     //   console.dir(va);
+       // console.log("old date  "+LastDt);
+   // }
+    $("#vb-log").kendoSparkline({
+        data: vb,
+        categoryAxis: {
+            categories: ld
+        },
+        tooltip: {
+            format: "{0} volts"
+        }
     });
-};
+
+    // User-set Sparkline type
+    $("#va-log").kendoSparkline({
+        type: "column",
+        data: va,
+        categoryAxis: {
+            categories: ld
+        },
+        tooltip: {
+            format: "{0} volts"
+        }
+    });
+
+    $("#ca-log").kendoSparkline({
+        type: "area",
+        data: ci,
+        categoryAxis: {
+            categories: ld
+        },
+        tooltip: {
+            format: "{0} amps"
+        }
+    });
+}
 

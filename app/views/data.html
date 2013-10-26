@@ -5,162 +5,172 @@
         left: -13px;
         width: 100%;
     }
-    #tree {
-        position: absolute;
-        left: 60px;
-        top: 325px;
-    }
     .gen_chart {
-        left: 275px;
         top: -52px;
         position: relative;
         z-index: 10000;
-        width: 755px;
-    }
-    #gauge {
-    }
-    #gauge_slider {
-        position: relative;
-        left: 49px;
-    }
-    #gauge_slider_div {
-        position: relative;
-        top: -454px;
-        width: 274px;
-        height: 400px;
-    }
-    #slider_div {
-        position: relative;
-        left: -50px;
-        top: -65px;
+        width: 1000px;
     }
     #pie_chart_div {
         position: relative;
-        top: -856px;
-        left: 1031px;
-        width: 470px;
-        height: 400px;
+        left: 1030px;
+        top: -450px;
+        width: 500px;
     }
-    #pie_chart {
-        //left: -530px;
-    }
-    #sparkDiv {
-        width: 400px;
-        height: 200px;
-        opacity:0.7;
-    }
+
     #gen_grid_div {
+        position: relative;
         top: -31px;
         position: relative;
     }
 </style>
 
-
-
-<!--
-AhCntr: 4002.2
-BTemp: "17 C"
-HSTemp: "20 C"
-IScale: 800
-Ia: 0
-Ib: 0
-IbC: 0
-KwhCntr: 109
-VScale: 1800
-Va: 0.11
-Vb: 25.08
-alarmsMS: "None"
-chState: "Night"
-faultsMS: "None"
-logDate: "2013-09-14 21:31:00.0"
-queenId: "queen_0003"
--->
 <!-- Error: Multiple directives [juiResizable, juiDraggable] asking for isolated scope on: -->
 <div ng-controller="GenGridCtrl" id="gen_grid_div">
-<table class="resizable" draggable ><row><td>
-    <div id="gen_info">
-        <h3>{{selectedItem.queenId}}</h3>
-        <small>{{selectedItem.logDate}} </small>
-        <p><strong>State: </strong>{{selectedItem.chState}}</p>
-        <p><strong>Voltages: Battery </strong>{{selectedItem.Vb}}<strong> Array </strong>{{selectedItem.Va}}</p>
-        <p><strong>Current: Battery </strong>{{selectedItem.IbC}}<strong> Array </strong>{{selectedItem.Ia}}</p>
-        <p><strong>Temp: Battery </strong>{{selectedItem.BTemp}}<strong> Charger </strong>{{selectedItem.HSTemp}}</p>
-        <p><strong>Total KWH to Date: </strong>{{selectedItem.KwhCntr}}</p>
-        <p><strong>Alarms </strong>{{selectedItem.alarmsMS}}<strong> Faults </strong>{{selectedItem.faultsMS}}</p>
-    </div>
-</td><td>
-    <div class="demo-section resizable">
-        <div id="loading"></div>
-        <div id="gen_grid" kendo-grid k-data-source="generation" k-scrollable="{virtual: true}" k-selectable="'row'" k-pageable="{ 'refresh': true, 'pageSizes': [5,10,25,50,100,500] }" k-sortable="true" k-groupable="true" k-filterable="true" k-on-change="rowSelected(kendoEvent)" k-columns="gen_grid_columns"  >
-    </div>
-</td></row></table>
+    <table><row><td>
+        <div id="gen_info">
+            <h3>{{selectedItem.queenId}}</h3>
+            <small>{{selectedItem.logDate}} </small>
+            <p><strong>State: </strong>{{selectedItem.chState}}</p>
+            <p><strong>Voltages: Battery </strong>{{selectedItem.Vb}}<strong> Array </strong>{{selectedItem.Va}}</p>
+            <p><strong>Current: Battery </strong>{{selectedItem.IbC}}<strong> Array </strong>{{selectedItem.Ia}}</p>
+            <p><strong>Temp: Battery </strong>{{selectedItem.BTemp}}<strong> Charger </strong>{{selectedItem.HSTemp}}</p>
+            <p><strong>Total KWH to Date: </strong>{{selectedItem.KwhCntr}}</p>
+            <p><strong>Alarms </strong>{{selectedItem.alarmsMS}}<strong> Faults </strong>{{selectedItem.faultsMS}}</p>
+        </div>
+    </td><td>
+        <div class="demo-section resizable">
+            <div id="loading"></div>
+            <div id="gen_grid" kendo-grid k-data-source="generation" k-scrollable="{virtual: true}" k-selectable="'row'" k-pageable="{ 'refresh': true, 'pageSizes': [5,10,25,50,100,500] }" k-sortable="true" k-groupable="true" k-filterable="true" k-on-change="rowSelected(kendoEvent)" k-columns="gen_grid_columns"  >
+            </div>
+    </td></row></table>
 </div>
 <br>
-    <div class="gen_chart resizable" draggable>
-        <div id="genChart"kendo-chart k-data-source="chartData" k-options="aggr_chart_options" k-on-series-hover="onSeriesHover(kendoEvent)"></div>
-    </div>
-
-<div draggable ng-controller="GenPieCtrl" id="gauge_slider_div" class="resizable">
-    <div class="gauge">
-        <div id="gauge" kendo-radial-gauge ng-model="sliderVal"></div>
-        <div id="slider_div">
-            <!-- input id="slider" kendo-slider k-min="0" k-max="30" k-large-step="20" k-tick-placement="'none'" ng-model="sliderVal"  class="span4 offset1"/ -->
-        </div>
-        <center><p id="gaugeLabel">Click the slider, watch the gauge)</p></center>
-    </div>
-    <div id="tree"></div>
+<div class="gen_chart resizable" draggable>
+    <div id="genChart"kendo-chart k-data-source="chartData" k-options="aggr_chart_options" k-on-series-hover="onSeriesHover(kendoEvent)"></div>
 </div>
 
 <div draggable ng-controller="GenPieCtrl" id="pie_chart_div" class="resizable">
     <div id="pie_chart" kendo-chart k-options="pie"/>
 </div>
 
+<style scoped>
+    .chart-wrapper {
+        width: 460px;
+        height: 100%;
+        margin: 0 auto 30px auto;
+        padding: 0 0 30px 0;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .climate, .temperature, .conditioner {
+        margin: 0 30px;
+        padding: 30px 0 0 0;
+    }
+    h1 {
+        margin-bottom: 20px;
+        font-size: 1.2em;
+    }
+    .history {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    .history td {
+        padding: 0;
+    }
+    .history td.item {
+        text-align: right;
+        line-height: normal;
+        vertical-align: middle;
+    }
+    .history td.spark {
+        text-align: center;
+        line-height: 50px;
+        padding: 0 5px;
+        height: 60px;
+    }
+    .history td.value {
+        font-size: 2em;
+        font-weight: normal;
+        line-height: normal;
+        vertical-align: bottom;
+    }
+    .history td.value span {
+        font-size: .5em;
+        vertical-align: top;
+    }
+    .stats {
+        text-align: center;
+    }
+    .pie-list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+    .pie-list li {
+        display: inline-block;
+        width: 54px;
+    }
+    #stats-mon,
+    #stats-tue,
+    #stats-wed,
+    #stats-thu,
+    #stats-fri,
+    #stats-sat,
+    #stats-sun {
+        display: block;
+        width: 54px;
+        line-height: 50px;
+    }
+    #temp-range {
+        width: 400px;
+        line-height: 50px;
+    }
+    .k-sparkline span {
+        height: 50px;
+        line-height: 60px;
+    }
+    .sparkFormat {
+        height: 50px;
+        line-height: 50px;
+        display: inline-block;
+        zoom: 1;
+        vertical-align: top;
+        text-align: center;
+        line-height: 50px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+</style>
 
 <script id="sparkTemplate" type="text/x-kendo-template">
-    <div id="sparkDiv" class="resizable" />
-    # setTimeout(function() { createSpark(4); }) #
+    <div class="chart-wrapper">
+        <div id="sparkDiv"class="climate" style="line-height: 60px">
+            <h3>
+                Days Data
+            </h3>
+            <table class="history">
+                <tr>
+                    <td class="item">Bat Volts</td>
+                    <td class="spark" colspan="3"><span id="vb-log" class="sparkFormat"></span></td>
+                </tr>
+                <tr>
+                    <td class="item">Array Volts</td>
+                    <td class="spark" colspan="3"><span id="va-log" class="sparkFormat"></span></td>
+                </tr>
+                <tr>
+                    <td class="item">Charge Amps</td>
+                    <td class="spark" colspan="3"><span id="ca-log" class="sparkFormat"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    # setTimeout(function() { createSparklines(); }) #
 </script>
-
 <script>
-    var tooltipTemplate = kendo.template($("#sparkTemplate").html());
-
-    function createSpark(productID) {
-        /*
-         console.log(productID);
-         var childDataSource = new kendo.data.DataSource({
-         type: "odata",
-         transport: {
-         read: {
-         url: "http://demos.kendoui.com/service/Northwind.svc/Order_Details?$filter=ProductID eq " + productID,
-         dataType: "jsonp"
-         }
-         }
-         });
-
-         $("#childChart").kendoChart({
-         dataSource: childDataSource,
-         title: {
-         text: "Orders"
-         },
-         legend: {
-         visible: false
-         },
-         seriesDefaults: {
-         type: "pie",
-         labels: {
-         visible: true,
-         format: "{0}%"
-         }
-         },
-         series: [{
-         field: "Quantity",
-         categoryField: "OrderID",
-         name: "Quantities Ordered",
-         labels: {
-         visible: false
-         }
-         }]
-         });
-         */
-    }
+var tooltipTemplate = kendo.template($("#sparkTemplate").html());
 </script>
+
+
+
+
